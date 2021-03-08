@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component{
   constructor(props){
@@ -25,11 +26,12 @@ class App extends Component{
             Learn React
           </a>
           <form>
-          Username: <input type="text" id="username"/>
-          Email: <input type="text" id="email"/>
+          Username: <input type="text" id="username"/>&nbsp;
+          Email: <input type="text" id="email"/>&nbsp;
           Password: <input type="password" id="password"/>&nbsp;
           <button onClick={this.signUp}>Sign Up</button><br/>
         </form>
+        <p id ="status"></p>
         </header>
         
       </div>
@@ -39,43 +41,25 @@ class App extends Component{
   signUp(event) {
     event.preventDefault();
     
-    var data = {
-      username: document.getElementById("username"),
-      email: document.getElementById("email"),
-      password: document.getElementById("password")
+    let newUser = {
+      username: document.getElementById("username").value,
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
     }
-    console.log(data);
+    console.log(newUser);
 
-    // Initalize AJAX Request
-    var xhttp2 = new XMLHttpRequest();
-    // const self = this;
-    // Response handler
-    xhttp2.onreadystatechange = function() {
+    axios.post('http://localhost:4000/signup',newUser)
+    .then(res => {
+        console.log(res);
+        document.getElementById("status").innerText=res.data.msg;
+        this.error = '';
+        // this.$router.push('/login');
+    }, err =>{
+        console.log(err.response);
+        document.getElementById("status").innerText=err.response.data.msg;
+    })
+    // console.log(newUser);
 
-
-        // Wait for readyState = 4 & 200 response
-        if (this.readyState === 4 && this.status === 200) {
-
-            // parse JSON response
-            var user = JSON.parse(this.responseText);
-            // self.setState({todos: [...self.state.todos, todo]});
-
-            // render(todo);
-
-        } else if (this.readyState === 4) {
-
-            // this.status !== 200, error from server
-            console.log(this.responseText);
-
-        }
-    };
-
-    xhttp2.open("POST", "http://localhost:3000/signup", true);
-
-    xhttp2.setRequestHeader("Content-type", "application/json");
-    xhttp2.send(JSON.stringify(data));
-    
-    // self.setState({input: ""});
   }
   
 }
