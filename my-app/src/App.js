@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component() {
+class App extends Component{
   constructor(props){
     super(props);
     this.signUp = this.signUp.bind(this);
@@ -24,13 +24,14 @@ class App extends Component() {
           >
             Learn React
           </a>
-        </header>
-        <form>
+          <form>
           Username: <input type="text" id="username"/>
           Email: <input type="text" id="email"/>
           Password: <input type="password" id="password"/>&nbsp;
           <button onClick={this.signUp}>Sign Up</button><br/>
         </form>
+        </header>
+        
       </div>
     );
   }
