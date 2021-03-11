@@ -6,6 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const user = require('./models/users');
+const { profile } = require('console');
 
 app.use(cors());
 app.use(morgan('tiny'));
@@ -50,3 +51,25 @@ app.post('/signup', (req, res, next) => {
     })
 
 });
+// Creating Profile
+/*app.post('/profile', (req, res, next) => { 
+    const new_profile = new profile({
+        username: req.body.username,
+        bio: req.body.bio,
+        year: req.body.year,
+        major: req.body.major,
+        skills: req.body.skills
+    })
+    console.log(new_profile);
+    new_profile.save(err => {
+        if(err){
+            return res.status(400).json({
+                msg: 'A profile has already been created.'
+            })
+        }
+        return res.status(200).json({
+            msg: "You've successfully created a profile!"
+        })
+    })
+
+});*/
