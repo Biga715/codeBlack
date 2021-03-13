@@ -3,54 +3,9 @@
 }
 
 body{
-  color: red;
+  
   margin: 0;
-}
-
-
-.container {
-  position: relative;
-  display: inline-block;
-}
-.button {
-  padding: 0;
-  width: 50px;
-  border: 0;
-  background-color: black;
-  color: grey;
-  cursor: pointer;
-  outline: 0;
-  font-size: 40px;
-}
-
-#menuBtn{
-  position: relative;
-  right: 1150%;
-}
-
-
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 300px;
-  z-index: 2;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-li {
-  padding: 8px 12px;
-}
-
-li:hover {
-  background-color: rgba(0, 0, 0, 0.14);
-  cursor: pointer;
+  background-color: #6B6B6B;
 }
 
 
@@ -58,53 +13,185 @@ li:hover {
 
 
 
-#codeBlackLogo{
-  color: silver;
-  position: relative;
-  right: 500px;
-}
-#header{
-  position: fixed;
-  /*overflow: hidden;*/
-  background-color: black;
-  top: 0px;
-  width: 100%;
-  left: 0px;
-  margin: 0;
-}
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-  color: red;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/*CSS for Nav.js*/
+nav{
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: red;
+  min-height: 10vh;
+  background-color: #212121;
+  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+a{
+  color: white;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navLinks{
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none
+}
+
+#picBanner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+}
+
+#bannerPic{
+  width: 100%;
+}
+
+/*CSS for SignUp.js*/
+#signUpContainer{
+  margin: auto;
+  width: 50%;
+  background-color: #f0e3d0;
+  align-items: center;
+  padding: 50px;
+
+}
+
+
+/*CSS for LogIn.js*/
+#logInContainer{
+  margin: auto;
+  width: 50%;
+  background-color: #f0e3d0;
+  align-items: center;
+  padding: 50px;
+
+}
+
+
+
+
+
+
+/* CSS for ChatWindow.js */
+#chatWindow{
+  background-color: #f0e3d0;
+  position: fixed;
+  overflow: scroll;
+  left: 25%;
+  width: 75%;
+  height: 84%;
+  scrollbar-width: none;
+
+}
+
+.message{
+  padding: 10px;
+}
+
+.otherMessage{
+  border-radius: 6px;
+  position: relative;
+  color: white;
+  background-color: grey;
+  width: 50%;
+  left: 1%;
+}
+
+.myMessage{
+  border-radius: 6px;
+  position: relative;
+  color: white;
+  background-color: darkred;
+  width: 50%;
+  left: 49%;
+}
+
+
+
+/* CSS for ChatBar.js */
+#chatBar{
+  position: fixed;
+  bottom: 0%;
+  width: 75%;
+  left: 25%;
+  height: 6%;
+  background-color: green;
+}
+
+#textForm{
+
+  width: 100%;
+  height: 100%;
+  background-color: red;
+ 
+}
+
+#attachBtn{
+  position: absolute;
+  left: 0%;
+  width: 20%;
+  height: 100%;
+  color: blue;
+}
+
+#textBox{
+  position: absolute;
+  left: 20%;
+  width: 60%;
+  height: 100%;
+ 
+}
+
+#sendBtn{
+  position: absolute;
+  left: 80%;
+  width: 20%;
+  height: 100%;
+}
+
+
+
+/*CSS for ConvoList.js*/
+#convoList{
+  position: fixed;
+  background-color: #f0e3d0;
+  left: 0%;
+  height: 100%;
+  width: 25%;
+ 
+}
+
+#convoListTitle{
+  
+  position: fixed;
+  border-radius: 6px;
+  left: 6%;
+
+}
+
+#convoContainer{
+  position: absolute;
+  top: 10%;
+  background-color: #f0e3d0;
+  width:100%;
+  height: 80%;
+  overflow-y: scroll;
+  overflow-x: visible;
+}
+
+.convoName{
+  background-color:#212121;
+  color: white;
+  border-radius: 6px;
+  height: 5%;
+  width: 90%;
+}
+
+.convoName:hover{
+  background-color: darkred;
+  overflow-x: visible;
+  height: 6%;
+  width: 100%;
+  
 }
