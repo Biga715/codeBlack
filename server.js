@@ -52,7 +52,7 @@ app.post('/signup', (req, res, next) => {
 
 });
 // Creating Profile
-/*app.post('/profile', (req, res, next) => { 
+app.post('/profile', (req, res, next) => { 
     const new_profile = new profile({
         username: req.body.username,
         bio: req.body.bio,
@@ -72,4 +72,4 @@ app.post('/signup', (req, res, next) => {
         })
     })
 
-});*/
+});

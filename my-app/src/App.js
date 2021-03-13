@@ -20,11 +20,11 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.signUp = this.signUp.bind(this);
+    /*this.signUp = this.signUp.bind(this);
     this.inputRef = React.createRef();
     this.showLogin = this.showLogin.bind(this);
     this.logIn = this.logIn.bind(this);
-    this.showSignup = this.showSignup.bind(this);
+    this.showSignup = this.showSignup.bind(this);*/
   }
 
   /*

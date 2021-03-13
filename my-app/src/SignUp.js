@@ -22,6 +22,12 @@ function SignUp() {
                 <label for="major"> Major:</label><br></br>
                 <input type="text" id="major" name="major"></input><br></br>
 
+                <label for="bio"> Bio:</label><br></br>
+                <input type="text" id="bio" name="bio"></input><br></br>
+
+                <label for="skills"> Skills:</label><br></br>
+                <input type="text" id="skills" name="skills"></input><br></br>
+
                 <label for="pword"> Password:</label><br></br>
                 <input type="password" id="pword" name="pword"></input><br></br>
 
@@ -36,6 +42,17 @@ function SignUp() {
 
         </div>
     );
+    
+    let newProfile={
+        name: document.getElementById("fname").value,
+        username: document.getElementById("uname").value,
+        email: document.getElementById("email").value,
+        year: document.getElementById("grade").value,
+        major: document.getElementById("major").value,
+        bio: document.getElementById("bio").value,
+        skills: document.getElementById("skills").value
+    }
+    console.log(newProfile);
 }
 
 export default SignUp;
