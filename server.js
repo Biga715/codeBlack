@@ -5,6 +5,7 @@ const {PORT, mongoUri } = require('./config');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
 const user = require('./models/users');
 const { profile } = require('console');
 
@@ -50,6 +51,48 @@ app.post('/signup', (req, res, next) => {
         })
     })
 
+});
+
+app.post('/login', (req, res, next) => { 
+    //if user is not found from the front end then user will be null
+    user.findOne({ username: req.body.username}, (err, users) =>{
+        if(err) {
+            return res.status(500).json({
+                msg: "There was an error with the server :(",
+                success: false
+            })
+        }
+        // console.log(users);
+        
+        if(!users){
+            return res.status(401).json({
+                msg: "Username was not found",
+                success: false
+            })
+        }
+        else{
+            let check= bcrypt.compareSync(req.body.password, users.password);
+            console.log("Password Check: " + check);
+            if (check){
+                return res.status(200).json({
+                    msg: "Valid Password",
+                    success: true
+                })
+            }else{
+                return res.status(400).json({
+                    msg: "Invalid Password",
+                    success: false
+                })
+            }
+        }
+        
+        // currentUser = req.body.username;
+        // let webtoken = jsonwt.sign({ user_id: users.user_id}, 'creativekey');
+        // return res.status(200).json({
+        //     title: 'login worked',
+        //     token: webtoken,
+        // })
+    })
 });
 // Creating Profile
 app.post('/profile', (req, res, next) => { 

@@ -290,7 +290,22 @@ class App extends Component {
       username: document.getElementById("username").value,
       password: document.getElementById("password").value
     }
-    console.log(user);
+    axios.post('http://localhost:4000/login', user)
+    .then(res => {
+        // console.log(res);
+        //if it works
+        if(res.status === 200){
+            console.log(res.data.msg)
+            // localStorage.setItem('token', res.data.token);
+            // document.getElementById("status").innerText=res.data.msg;
+            // this.$router.push('/home');
+        }
+    }, err => {
+        this.error = err.response.data.msg;
+        console.log(this.error);
+        // console.log(err);
+        // document.getElementById("status").innerText=err.response.data.msg;
+    })
   }
 
   showSignup(){
