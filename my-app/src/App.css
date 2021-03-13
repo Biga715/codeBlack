@@ -57,6 +57,12 @@ a{
 
 }
 
+  /*
+#login, #loginTitle, #needToSignup, #signupStatus{
+  display: none;
+}
+*/
+
 
 /*CSS for LogIn.js*/
 #logInContainer{
