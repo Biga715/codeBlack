@@ -97,7 +97,9 @@ app.post('/login', (req, res, next) => {
 // Creating Profile
 app.post('/profile', (req, res, next) => { 
     const new_profile = new profile({
+        name: req.body.name,
         username: req.body.username,
+        email: req.body.email,
         bio: req.body.bio,
         year: req.body.year,
         major: req.body.major,
