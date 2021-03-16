@@ -1,10 +1,55 @@
-import React from "react";
+import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
+/*
 
-function SignUp() {
+    
+    let newProfile={
+        name: document.getElementById("fname").value,
+        username: document.getElementById("uname").value,
+        email: document.getElementById("email").value,
+        year: document.getElementById("grade").value,
+        major: document.getElementById("major").value,
+        bio: document.getElementById("bio").value,
+        skills: document.getElementById("skills").value
+    }
+    console.log(newProfile);
+}
+*/
 
-    return (
-        <div id="signUpContainer">
+
+class SignUp extends Component{
+    constructor(props){
+        super(props);
+        this.signUp = this.signUp.bind(this);
+    }
+
+
+    signUp(event) {
+        event.preventDefault();
+        
+        let newUser = {
+          username: document.getElementById("uname").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("pword").value
+        }
+        console.log(newUser);
+    
+        axios.post('http://localhost:4000/signup', newUser)
+          .then(res => {
+            console.log(res);
+            this.error = '';
+            // this.$router.push('/login');
+          }, err => {
+            console.log(err.response);
+        })
+
+    
+      }
+
+    render(){
+        return(
+            <div id="signUpContainer">
             <h1>Sign Up</h1>
             <form id="signUpForm" >
                 <label for="fname" > Full Name:</label><br></br>
@@ -36,23 +81,12 @@ function SignUp() {
 
 
 
-                <input type="submit" value="Sign Up"></input>
+                <input type="submit" onClick={this.signUp} value="Sign Up"></input>
             </form>
 
 
         </div>
-    );
-    
-    let newProfile={
-        name: document.getElementById("fname").value,
-        username: document.getElementById("uname").value,
-        email: document.getElementById("email").value,
-        year: document.getElementById("grade").value,
-        major: document.getElementById("major").value,
-        bio: document.getElementById("bio").value,
-        skills: document.getElementById("skills").value
+        );
     }
-    console.log(newProfile);
 }
-
 export default SignUp;

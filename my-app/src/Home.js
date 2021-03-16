@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from 'react';
 import './App.css';
 import HomeBanner from './HomeBanner';
-
+/*
 function Home() {
 
     return (
@@ -9,6 +9,21 @@ function Home() {
             <HomeBanner></HomeBanner>
         </div>
     );
+}
+*/
+
+class Home extends Component {
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        return(
+            <div>
+                <HomeBanner></HomeBanner>
+            </div>
+        );
+    }
 }
 
 export default Home;
