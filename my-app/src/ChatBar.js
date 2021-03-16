@@ -26,6 +26,22 @@ var socket = socketClient(SERVER);
 class ChatBar extends Component{
     constructor(props){
         super(props);
+        this.state ={
+            textVal: ' ',
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+
+
+
+    handleChange(event){
+        this.setState({
+            textVal: event.target.value,
+        })
+
+        console.log(this.state.textVal);
     }
 
     sendMessage= () => {
@@ -39,6 +55,7 @@ class ChatBar extends Component{
         //document.getElementById("textMessage").value = " ";
     
     }
+   
 
     render(){
      
@@ -46,11 +63,11 @@ class ChatBar extends Component{
             
             <div id="chatBar">
             
-             <ChatWindow message={"msgs"}></ChatWindow>
+             <ChatWindow message={this.state.textVal}></ChatWindow>
 
             <form onSubmit={() => this.sendMessage() }id="textForm">
             <button id="attachBtn"> 📎</button>
-                <input type="text" id="textBox"></input>
+                <input type="text" id="textBox" value={this.state.textVal} onChange={this.handleChange}></input>
                 <input type="submit" value="Send" id="sendBtn"></input>
             </form>
            

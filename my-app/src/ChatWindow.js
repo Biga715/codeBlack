@@ -10,7 +10,8 @@ class ChatWindow extends Component{
     
 
     render(){
-        console.log(this.props.message)
+        console.log(this.props.message);
+        console.log(this.props.msg);
         const msg = this.props.message;
         console.log(msg)
         var thisIsMyCopy = '<p>hi</p>'; 
