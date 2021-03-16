@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-
 class ChatWindow extends Component{
     constructor(props){
         super(props);

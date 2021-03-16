@@ -27,9 +27,6 @@ class ChatBar extends Component{
     constructor(props){
         super(props);
     }
-    /*state = {
-        data: barData
-    }*/
 
     sendMessage= () => {
         var socket = socketClient(SERVER);
@@ -62,5 +59,6 @@ class ChatBar extends Component{
         );
     }
 }
+
 
 export default ChatBar;
