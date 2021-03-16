@@ -2,6 +2,7 @@ import React from "react";
 import './App.css';
 
 function ChatWindow() {
+    const socketio = io.connect();
 
     return (
         <div id="chatWindow">
