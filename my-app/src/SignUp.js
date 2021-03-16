@@ -31,7 +31,11 @@ class SignUp extends Component{
         let newUser = {
           username: document.getElementById("uname").value,
           email: document.getElementById("email").value,
-          password: document.getElementById("pword").value
+          password: document.getElementById("pword").value,
+          fullName: document.getElementById("fname").value,
+          grade: document.getElementById("grade").value,
+          bio: document.getElementById("bio").value,
+          skills: document.getElementById("skills").value
         }
         console.log(newUser);
     
