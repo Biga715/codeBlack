@@ -1,11 +1,24 @@
-import React from "react";
+import React, { Component } from 'react';
 import './App.css';
 
-function ChatWindow() {
-    const socketio = io.connect();
 
-    return (
-        <div id="chatWindow">
+
+class ChatWindow extends Component{
+    constructor(props){
+        super(props);
+    }
+    
+    
+
+    render(){
+        console.log(this.props.message)
+        const msg = this.props.message;
+        console.log(msg)
+        var thisIsMyCopy = '<p>hi</p>'; 
+     //<p class="message">{thisIsMyCopy}</p>
+        console.log(thisIsMyCopy)
+        return(
+            <div id="chatWindow">
             <h1 id="convoTitle">Conversation Title</h1>
 
             <div class="otherMessage">
@@ -15,10 +28,8 @@ function ChatWindow() {
             </div>
 
 
-            <div class="myMessage">
-                <p class="message">Hello, my name is Arric Lucas and this is my message from me to you. I hope that
-                this is long enough to test out the functionality of the website that we are creating.</p>
-            </div>
+           
+        <div id = "testMsg" class="myMessage" dangerouslySetInnerHTML={{__html:thisIsMyCopy}}></div>
 
 
 
@@ -67,7 +78,10 @@ function ChatWindow() {
             </div>
             
         </div>
-    );
-}
+       
+        );
 
+       
+    }
+}
 export default ChatWindow;

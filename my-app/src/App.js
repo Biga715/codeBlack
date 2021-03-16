@@ -8,15 +8,15 @@ import SignUp from './SignUp';
 import Nav from './Nav';
 import Discussion from './Discussion';
 import Home from './Home';
-
+import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-
-
-
-
+const SERVER = "http://localhost:3000";
+var socket = socketClient(SERVER);
 
 class App extends Component {
+
+  
 
   constructor(props) {
     super(props);
@@ -97,16 +97,30 @@ class App extends Component {
   }
   */
 
+// sending sockets
+send = () => {
+  var socket = socketClient(SERVER);
+  console.log(`I'm connected with the back-end`);
+  alert("working")
+}
+/*sendButton = () => {
+  var socket = socketClient(SERVER);
+  console.log(`I'm connected with the back-end`);
+  alert("sent!")
+}*/
+
+
   render() {
+    
 
-
-
-
-
+   /* socket.on('connection', () => {
+      console.log(`I'm connected with the back-end`);
+      alert("working")
+    });*/
+    
 
     return (
-
-
+      
       <Router>
         <div className="App">
           <Nav></Nav>
@@ -116,9 +130,13 @@ class App extends Component {
             <Route path="/signUp" component={SignUp}></Route>
             <Route path="/logIn" component={LogIn}></Route>
           </Switch>
+          
+
+          <button onClick={() => this.send() }>Testing</button>
 
         </div>
       </Router>
+
 
       /*
        <div className="App">

@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const user = require('./models/users');
 const { profile } = require('console');
 
+
 app.use(cors());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
@@ -19,7 +20,23 @@ app.use(bodyParser.urlencoded({
 // Testing to see if server is connected
 app.get('/', (req, res) => res.send('Hello World!!'));
 
-app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
+
+//Connecting Socket.io
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
+
+
+io.on('connection', (socket) => { 
+    console.log('new client connected');
+    socket.emit('connection', null);
+    alert("server")
+    
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+      })
+});
+
+http.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
 
 // Connecting to MongoDB database
 mongoose
