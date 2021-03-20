@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const user = require('./models/users');
 const { profile } = require('console');
+const upload = require('./upload');
 
 
 app.use(cors());
@@ -20,6 +21,8 @@ app.use(bodyParser.urlencoded({
 // Testing to see if server is connected
 app.get('/', (req, res) => res.send('Hello World!!'));
 
+//upload file
+app.post('/upload', upload);
 
 //Connecting Socket.io
 var http = require('http').createServer(app);
@@ -30,7 +33,7 @@ io.on('connection', (socket) => {
     console.log('new client connected');
     socket.emit('connection', null);
     alert("server")
-    
+
     socket.on('disconnect', () => {
         console.log('user disconnected')
       })

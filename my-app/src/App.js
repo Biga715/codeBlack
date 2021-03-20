@@ -132,8 +132,6 @@ send = () => {
           </Switch>
           
 
-          <button onClick={() => this.send() }>Testing</button>
-
         </div>
       </Router>
 
