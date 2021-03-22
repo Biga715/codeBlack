@@ -64,6 +64,10 @@ class Nav extends Component{
                 <li>Log in</li>
                 </Link>
                 
+                <Link to="profile">
+                <li>Profile</li>
+                </Link>
+
             </ul>
         </nav>
         );
