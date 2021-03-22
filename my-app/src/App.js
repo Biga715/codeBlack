@@ -165,13 +165,10 @@ return (
   <Router>
     <div className="App">
       <Nav></Nav>
-      <Route path="/discussion" component={Discussion}></Route>
       <Route path="/" exact component={Home}></Route>
       <Route path="/discussion" component={Discussion}></Route>
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/logIn" component={LogIn}></Route>
-
-
     </div>
   </Router>
 
