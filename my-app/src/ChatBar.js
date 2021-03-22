@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
 import ChatWindow from './ChatWindow';
 import socketClient  from "socket.io-client";
+import { STATES } from 'mongoose';
 const SERVER = "http://localhost:3000";
 var socket = socketClient(SERVER);
 
-
+/*
 class ChatBar extends Component{
     constructor(props){
         super(props);
@@ -69,3 +70,53 @@ class ChatBar extends Component{
 
 
 export default ChatBar;
+*/
+
+function ChatBar(props){
+
+
+
+    
+    console.log(props);
+    /*
+    const fileUploadButton = () => {
+        document.getElementById('fileButton').click();
+        document.getElementById('fileButton').onchange = () =>{      
+        this.setState({
+            fileUploadState:document.getElementById('fileButton').value
+                });
+            }
+        
+    }
+                    <button onClick={this.fileUploadButton} component="span" id="attachBtn"> 📎</button>
+                {this.state.selectedFile}
+                ' <input type="text" id="textBox" value={this.state.textVal} onChange={this.handleChange}></input>
+*/
+    
+
+
+     
+        return(
+            
+            <div id="chatBar">
+            
+             
+        
+
+            <form id="textForm" onSubmit={props.onMessageSubmit}>
+            <input type="file" id="fileButton" />
+
+                <input type="text" id="textBox" value={props.state.message} label="message" name="message" onChange={e => props.onTextChange(e)}></input>
+                <input type="submit" value="Send" id="sendBtn"></input>
+            </form>
+           
+         </div>
+         
+        );
+    }
+
+
+
+export default ChatBar;
+
+

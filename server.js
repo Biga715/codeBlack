@@ -56,6 +56,9 @@ io.on('connection', socket => {
     //socket.emit('connection', null);
    // socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) });
     
+   socket.on('message', ({name, message}) => {
+    io.emit('message', {name, message})
+   })
     socket.on("hello", (arg) => {
         console.log(arg); // world
       });

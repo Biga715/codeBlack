@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
+/*
 class ChatWindow extends Component{
     constructor(props){
         super(props);
@@ -76,6 +76,8 @@ class ChatWindow extends Component{
             <div class="myMessage">
                 <p class="message">IM OUTSIDE IN AN AMG -Drake🥺</p>
             </div>
+
+            {this.props.renderChat}
             
         </div>
        
@@ -83,5 +85,22 @@ class ChatWindow extends Component{
 
        
     }
+}
+export default ChatWindow;
+*/
+
+ function ChatWindow(props){
+ 
+    
+    console.log(props);
+    return(
+        <div id="chatWindow">
+        
+        {props.renderChat}
+      
+        </div>
+
+    );
+  
 }
 export default ChatWindow;
