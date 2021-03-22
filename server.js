@@ -8,7 +8,9 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const user = require('./models/users');
 const { profile } = require('console');
-const upload = require('./upload');
+const request = require('request');
+//const { default: Home } = require('./my-app/src/Home');
+//const upload = require('./upload');
 
 
 app.use(cors());
@@ -18,26 +20,51 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-// Testing to see if server is connected
-app.get('/', (req, res) => res.send('Hello World!!'));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  app.get('/jokes/random', (req, res) => {
+    request(
+      { url: 'https://joke-api-strict-cors.appspot.com/jokes/random' },
+      (error, response, body) => {
+        if (error || response.statusCode !== 200) {
+          return res.status(500).json({ type: 'error', message: err.message });
+        }
+  
+        res.json(JSON.parse(body));
+      }
+    )
+  });
+
+app.get('/', (req, res) => res.send('hey!'));
 
 //upload file
-app.post('/upload', upload);
+//app.post('/upload', upload);
 
 //Connecting Socket.io
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
 
-
-io.on('connection', (socket) => { 
+const io = require('socket.io')(http, {
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true
+  }
+});
+io.on('connection', socket => { 
     console.log('new client connected');
-    socket.emit('connection', null);
-    alert("server")
+    //socket.emit('connection', null);
+   // socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) });
+    
+    socket.on("hello", (arg) => {
+        console.log(arg); // world
+      });
 
     socket.on('disconnect', () => {
         console.log('user disconnected')
       })
 });
+
 
 http.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
 

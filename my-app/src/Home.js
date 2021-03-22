@@ -13,33 +13,18 @@ function Home() {
 */
 
 class Home extends Component {
-    constructor(props){
-        super(props);
-         render(){
-        return(
-            <div>
-            <section id = "colorlib-hero" className="js-fullheight" data-section="home">
-            <div className= "flex-slider js-fullheight">
-            <ul className = "slides">
-            <li style = {{ backgroundImage: //'url ()'}} //Need to put url image of the homepage
-            <div className= "overlay" />
-            <div className = "container-fluid">
-            <div className= "row">
-            <div className= "col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-            <div className = "slider-inner-text js-fullheight">
-            <div className= "desc">
-            <w0> className= Welcome! <br 
-            
-            
-    }
-
-    render(){
-        return(
-            <div>
-                <HomeBanner></HomeBanner>
+   
+        constructor(props){
+            super(props);
+        }
+    
+        render(){
+            return(
+                <div id="picBanner">
+                <img id = "bannerPic"src="https://i.pinimg.com/originals/ae/81/5f/ae815fbd4538f2f3e56d069e93d2c455.jpg" alt="our logo"></img>
             </div>
-        );
-    }
+          
+            );
+        }
 }
-
 export default Home;

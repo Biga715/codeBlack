@@ -11,12 +11,16 @@ import Home from './Home';
 import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const SERVER = "http://localhost:3000";
+const SERVER = "http://localhost:4000";
 var socket = socketClient(SERVER);
-
-class App extends Component {
-
+socket.emit("hello", "world");
+/*socket.on("hello", (arg1, arg2, arg3) => {
+  console.log(arg1); // 1
+  console.log(arg2); // "2"
+  console.log(arg3); // { 3: '4', 5: ArrayBuffer (1) [ 6 ] }
   
+});*/
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -28,7 +32,9 @@ send = () => {
   var socket = socketClient(SERVER);
   console.log(`I'm connected with the back-end`);
   alert("working")
+  console.log(SERVER);
 }
+
 
   render() {
 
@@ -43,7 +49,7 @@ send = () => {
             <Route path="/signUp" component={SignUp}></Route>
             <Route path="/logIn" component={LogIn}></Route>
           </Switch>
-          
+          <button onClick={this.send}  id="attachBtn"> testing</button>
 
         </div>
       </Router>
