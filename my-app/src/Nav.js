@@ -51,11 +51,7 @@ class Nav extends Component{
                 <Link to="/">
                 <li>Home</li>
                 </Link>
- 
-                <Link>
-                <li>About Us</li>
-                </Link>
- 
+
                 <Link to="/discussion">
                 <li>Discussion Board</li>
                 </Link>
