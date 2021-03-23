@@ -49,7 +49,7 @@ class Profile extends Component{
         return(
         <div id="profile">
             
-            <div id="convoContainer">
+            <div id="profileContainer">
                <img id= "avatar" src ="defaultuser.png"></img>
                <h2 id="username"></h2>
                <h2 id="name">Name: </h2>
