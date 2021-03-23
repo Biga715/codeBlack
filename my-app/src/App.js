@@ -8,6 +8,7 @@ import SignUp from './SignUp';
 import Nav from './Nav';
 import Discussion from './Discussion';
 import Home from './Home';
+import Profile from './Profile';
 import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -169,8 +170,7 @@ return (
       <Route path="/discussion" component={Discussion}></Route>
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/logIn" component={LogIn}></Route>
-
-
+      <Route path="/profile" component={Profile}></Route>
     </div>
   </Router>
 
