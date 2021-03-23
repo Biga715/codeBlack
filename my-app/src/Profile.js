@@ -19,7 +19,8 @@ class Profile extends Component{
                 console.log(this.profile);
                 document.getElementById("logout").style.visibility = "hidden";
                 if(this.profile != null){
-                    document.getElementById("username").textContent = "Username: " + this.profile.username;
+                    document.getElementById("username").textContent = this.profile.username;
+                    document.getElementById("name").textContent = "Name: " + this.profile.name;
                     document.getElementById("year").textContent = "Year: " + this.profile.year;
                     document.getElementById("major").textContent = "Major: " + this.profile.major;
                     document.getElementById("skills").textContent = "Skills: " + this.profile.skills;
@@ -32,7 +33,8 @@ class Profile extends Component{
         axios.get('http://localhost:4000/logout' )
             .then(res => {
                 console.log(res);
-                document.getElementById("username").textContent = "Username: ";
+                document.getElementById("username").textContent = "";
+                document.getElementById("name").textContent = "Name: ";
                 document.getElementById("year").textContent = "Year: ";
                 document.getElementById("major").textContent = "Major: ";
                 document.getElementById("skills").textContent = "Skills: ";
@@ -49,7 +51,8 @@ class Profile extends Component{
             
             <div id="convoContainer">
                <img id= "avatar" src ="defaultuser.png"></img>
-               <h2 id="username">Username: </h2>
+               <h2 id="username"></h2>
+               <h2 id="name">Name: </h2>
                <h2 id="year">Year: </h2>
                <h2 id="major">Major: </h2>
                <h2 id="skills">Skills: </h2>
