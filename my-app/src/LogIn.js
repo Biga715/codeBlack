@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import {Button, Form, FormGroup, Label, Input}from 'reactstrap';
+import {FacebookLoginButton} from 'react-social-login-buttons';
 import axios from 'axios';
 
 
@@ -33,24 +35,27 @@ class LogIn extends Component{
             // console.log(err);
             // document.getElementById("status").innerText=err.response.data.msg;
         })
-      }
+    }
     render(){
         return(
-<div id="logInContainer">
+            <Form className ="LogIn">
             <h1>Log In</h1>
-            <form id="logInForm" >
-
-                <label for="uname"> Username:</label><br></br>
-                <input type="text" id="unameLogIn" name="uname"></input><br></br>
-
-                <label for="pword"> Password:</label><br></br>
-                <input type="password" id="pwordLogIn" name="pword"></input><br></br>
-
-                <input type="submit" value="Log In" onClick={this.logIn}></input>
-            </form>
-
-
-        </div>
+                <FormGroup>
+                <label for="uname"> Username  </label>
+                <br></br>
+                <input type="text" id="unameLogIn" name="uname"></input>
+                </FormGroup>
+               
+                <FormGroup>
+                <label for="pword"> Password  </label>
+                <br></br>
+                <input type="password" id="pwordLogIn" name="pword"></input>
+                </FormGroup>
+                
+                <FormGroup>
+                <Button>Log in</Button>
+                </FormGroup>
+            </Form>
         );
     }
 }

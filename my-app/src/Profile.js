@@ -13,7 +13,7 @@ class Profile extends Component{
         <div id="profile">
             
             <div id="convoContainer">
-               <img id= "avatar" src ="https://icotar.com/avatar/username.png?s=200"></img>
+               <img id= "avatar" src ="defaultuser.png"></img>
                <h2 class="username">Username</h2>
                <h2 class="year">Year</h2>
                <h2 class="major">Major</h2>

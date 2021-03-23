@@ -43,29 +43,34 @@ class Nav extends Component{
     }
 
     render(){
+        //                <h1 style={mystyle}>Mission Statement</h1>
+        const headerfont = {
+            color: "white",
+            fontFamily: "Courier"
+          };
         return(
             <nav>
-            <h1 id="codeBlackLogo"> &lt;codeBlack/&gt;</h1>
+            <h1 id="codeBlackLogo" style={headerfont}> &lt;codeBlack/&gt;</h1>
  
             <ul className="navLinks">
                 <Link to="/">
-                <li>Home</li>
+                <li style={headerfont}>Home</li>
                 </Link>
 
                 <Link to="/discussion">
-                <li>Discussion Board</li>
+                <li style={headerfont}>Discussion Board</li>
                 </Link>
  
                 <Link to="signUp">
-                <li>Sign Up</li>
+                <li style={headerfont}> Sign Up</li>
                 </Link>
  
                 <Link to="logIn">
-                <li>Log in</li>
+                <li style={headerfont}>Log in</li>
                 </Link>
                 
                 <Link to="profile">
-                <li>Profile</li>
+                <li style={headerfont}>Profile</li>
                 </Link>
 
             </ul>
