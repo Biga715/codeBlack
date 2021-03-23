@@ -43,9 +43,11 @@ class SignUp extends Component{
           .then(res => {
             console.log(res);
             this.error = '';
+            document.getElementById("status").innerText=res.data.msg;
             // this.$router.push('/login');
           }, err => {
             console.log(err.response);
+            document.getElementById("status").innerText=err.response.data.msg;
         })
 
     
@@ -89,6 +91,7 @@ class SignUp extends Component{
 
                 <input type="submit" onClick={this.signUp} value="Sign Up"></input>
             </form>
+            <h3 id = "status"></h3>
 
 
         </div>
