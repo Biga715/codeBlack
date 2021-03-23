@@ -6,6 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+// const session = require('express-session');
 const user = require('./models/users');
 const profile = require('./models/profile');
 // const { profile } = require('console');
@@ -13,7 +14,7 @@ const request = require('request');
 //const { default: Home } = require('./my-app/src/Home');
 //const upload = require('./upload');
 
-var currentUser;
+var currentUser = "";
 
 app.use(cors());
 app.use(morgan('tiny'));
@@ -21,6 +22,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+// app.use(session({
+//     secret: 'secret-key',
+//     // cookie: { maxAge: 60000 },
+//     resave: false,
+//     saveUninitialized: false
+// }));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -152,10 +159,15 @@ app.post('/login', (req, res, next) => {
             if (check){
                 currentUser = req.body.username;
                 console.log("current user:" + currentUser);
+                // req.session.currentUser = req.body.username;
+                // currentUser = req.session.currentUser;
+                // console.log("current user: " + req.session.currentUser);
+                // console.log("session id: " + req.sessionID);
                 return res.status(200).json({
                     msg: "You've successfully logged in!",
                     success: true
                 })
+                // return res.json(req.session);
             }else{
                 return res.status(400).json({
                     msg: "Invalid Password",
@@ -206,3 +218,35 @@ app.post('/profile', (req, res, next) => {
     })
 
 });
+
+//get profile data
+app.get('/getProfileData', (req,res,next)=> {
+    // let public = 'public';
+    // console.log("session user: " + req.session.currentUser);
+    // console.log("session id on profile: " + req.sessionID);
+    //get public post
+    profile.find({ username: currentUser }, (err, profile) => {
+        if(err)return console.log(err)
+        console.log(profile);
+        res.contentType('json');
+        res.send(profile);
+    })
+    
+})
+
+//logout
+app.get('/logout', (req,res,next)=> {
+    // currentUser = "";
+    if (currentUser == ""){
+        return res.status(400).json({
+            msg: 'Not logged in.'
+        })
+    }
+    else{
+        currentUser = ""
+        return res.status(200).json({
+            msg: "Successfully logged out"
+        })
+    }
+    
+})

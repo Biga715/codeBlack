@@ -24,14 +24,14 @@ class LogIn extends Component{
             if(res.status === 200){
                 console.log(res.data.msg)
                 // localStorage.setItem('token', res.data.token);
-                // document.getElementById("status").innerText=res.data.msg;
+                document.getElementById("status").innerText=res.data.msg;
                 // this.$router.push('/home');
             }
         }, err => {
             this.error = err.response.data.msg;
             console.log(this.error);
             // console.log(err);
-            // document.getElementById("status").innerText=err.response.data.msg;
+            document.getElementById("status").innerText=err.response.data.msg;
         })
       }
     render(){
@@ -48,6 +48,7 @@ class LogIn extends Component{
 
                 <input type="submit" value="Log In" onClick={this.logIn}></input>
             </form>
+            <h3 id = "status"></h3>
 
 
         </div>
