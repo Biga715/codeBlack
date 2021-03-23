@@ -7,11 +7,13 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const user = require('./models/users');
-const { profile } = require('console');
+const profile = require('./models/profile');
+// const { profile } = require('console');
 const request = require('request');
 //const { default: Home } = require('./my-app/src/Home');
 //const upload = require('./upload');
 
+var currentUser;
 
 app.use(cors());
 app.use(morgan('tiny'));
@@ -102,6 +104,30 @@ app.post('/signup', (req, res, next) => {
     })
 
 });
+// Adding a new profile
+app.post('/addProfile', (req, res, next) => { 
+    const new_user_profile = new profile({
+        name: req.body.fullName,
+        username: req.body.username,
+        email: req.body.email,
+        major: req.body.major,
+        year: req.body.grade,
+        bio: req.body.bio,
+        skills: req.body.skills
+    })
+    console.log(new_user_profile);
+    new_user_profile.save(err => {
+        if(err){
+            return res.status(400).json({
+                msg: 'Something is wrong'
+            })
+        }
+        return res.status(200).json({
+            msg: "Profile Added!"
+        })
+    })
+
+});
 
 app.post('/login', (req, res, next) => { 
     //if user is not found from the front end then user will be null
@@ -124,8 +150,10 @@ app.post('/login', (req, res, next) => {
             let check= bcrypt.compareSync(req.body.password, users.password);
             console.log("Password Check: " + check);
             if (check){
+                currentUser = req.body.username;
+                console.log("current user:" + currentUser);
                 return res.status(200).json({
-                    msg: "Valid Password",
+                    msg: "You've successfully logged in!",
                     success: true
                 })
             }else{
@@ -144,6 +172,16 @@ app.post('/login', (req, res, next) => {
         // })
     })
 });
+// Adding a new profile
+app.post('/getCurrentUser', (req, res, next) => { 
+    let data = {
+        currentuser: currentUser
+    };
+    return data;
+
+});
+
+
 // Creating Profile
 app.post('/profile', (req, res, next) => { 
     const new_profile = new profile({

@@ -8,7 +8,7 @@ const profileSchema = new Schema({
     major: String,
     year: String,
     bio: String,
-    skills: [String],
+    skills: String,
 })
 const profile = mongoose.model('profile', profileSchema);
 

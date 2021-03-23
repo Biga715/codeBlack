@@ -34,6 +34,7 @@ class SignUp extends Component{
           password: document.getElementById("pword").value,
           fullName: document.getElementById("fname").value,
           grade: document.getElementById("grade").value,
+          major: document.getElementById("major").value,
           bio: document.getElementById("bio").value,
           skills: document.getElementById("skills").value
         }
@@ -48,6 +49,14 @@ class SignUp extends Component{
             console.log(err.response);
         })
 
+        axios.post('http://localhost:4000/addProfile', newUser)
+          .then(res => {
+            console.log(res);
+            this.error = '';
+            // this.$router.push('/login');
+          }, err => {
+            console.log(err.response);
+        })
     
       }
 
