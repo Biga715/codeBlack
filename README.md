@@ -1,4 +1,9 @@
 # codeBlack
+# Running Locally
+- cd into repo and into my-app.
+- run 'npm install' and 'npm start'
+- open another terminal, repeat first step, and run 'node server.js'
+- open on localhost:3000 (the socket server was set to work on :3000 so another port won't make it work)
 # Beginning Prototypes
 ![Home Page](https://user-images.githubusercontent.com/59845198/110538397-a04bf580-80e9-11eb-89ad-35257314f1db.png)
 ![Login](https://user-images.githubusercontent.com/59845198/110538418-a510a980-80e9-11eb-9eea-0c930a953f09.png)
