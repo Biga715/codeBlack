@@ -47,7 +47,7 @@ class Nav extends Component{
         const headerfont = {
             color: "white",
             fontFamily: "Courier"
-          };
+        };
         return(
             <nav>
             <h1 id="codeBlackLogo" style={headerfont}> &lt;codeBlack/&gt;</h1>
