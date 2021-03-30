@@ -11,7 +11,7 @@ import Home from './Home';
 import Profile from './Profile';
 import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import {Button, Form, FormGroup, Label, Input}from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input}  from 'reactstrap';
 import {FacebookLoginButton} from 'react-social-login-buttons';
 
 const SERVER = "http://localhost:4000";
