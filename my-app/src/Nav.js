@@ -43,34 +43,34 @@ class Nav extends Component{
     }
 
     render(){
-        //                <h1 style={mystyle}>Mission Statement</h1>
+        //              whats smaller than a break, out of line, gif banner
         const headerfont = {
             color: "white",
             fontFamily: "Courier"
-          };
+        };
         return(
-            <nav>
-            <h1 id="codeBlackLogo" style={headerfont}> &lt;codeBlack/&gt;</h1>
- 
+            <nav class = "navbar sticky-top navbar-dark bg-dark"> 
+            <span class="navbar-brand mb-0 h1" style={headerfont}><strong><h2>codeBlack</h2></strong></span>
+           
             <ul className="navLinks">
                 <Link to="/">
-                <li style={headerfont}>Home</li>
+                <li style={headerfont}><h5>Home</h5></li>
                 </Link>
 
                 <Link to="/discussion">
-                <li style={headerfont}>Discussion Board</li>
+                <li style={headerfont}><h5>Discussion Board</h5></li>
                 </Link>
  
                 <Link to="signUp">
-                <li style={headerfont}> Sign Up</li>
+                <li style={headerfont}><h5>Sign Up</h5> </li>
                 </Link>
  
                 <Link to="logIn">
-                <li style={headerfont}>Log in</li>
+                <li style={headerfont}><h5>Log in</h5></li>
                 </Link>
                 
                 <Link to="profile">
-                <li style={headerfont}>Profile</li>
+                <li style={headerfont}><h5>Profile</h5></li>
                 </Link>
 
             </ul>
