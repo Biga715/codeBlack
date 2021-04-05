@@ -33,7 +33,7 @@ class LogIn extends Component{
             this.error = err.response.data.msg;
             console.log(this.error);
             // console.log(err);
-            document.getElementById("status").innerText=err.response.data.msg;
+            document.getElementById("status").innerText="Invalid Credentials";
         })
     }
     render(){
