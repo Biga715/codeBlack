@@ -43,14 +43,18 @@ class Nav extends Component{
     }
 
     render(){
-        //              whats smaller than a break, out of line, gif banner
         const headerfont = {
             color: "white",
             fontFamily: "Courier"
         };
         return(
-            <nav class = "navbar sticky-top navbar-dark bg-dark"> 
-            <span class="navbar-brand mb-0 h1" style={headerfont}><strong><h2>codeBlack</h2></strong></span>
+            <nav class = "navbar sticky-top navbar-light bg-dark"> 
+            <div class = "fancy">
+                <h2 style={headerfont}> 
+                    <span class="txt-type" data-wait="3000" data-words='["codeBlack"]'> </span>
+                </h2>
+            </div>
+
            
             <ul className="navLinks">
                 <Link to="/">
