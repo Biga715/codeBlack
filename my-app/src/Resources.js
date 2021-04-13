@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Pdf from './Pdf';
 
 
  function Resources(props){
@@ -8,8 +9,8 @@ import './App.css';
     console.log(props);
     return(
         <div id="resources">
-        
-        
+            <button>Add Resource</button>
+            <Pdf></Pdf>
       
         </div>
 
