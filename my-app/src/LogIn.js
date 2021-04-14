@@ -3,6 +3,7 @@ import './App.css';
 import {Button, Form, FormGroup, Label, Input}from 'reactstrap';
 import {FacebookLoginButton} from 'react-social-login-buttons';
 import axios from 'axios';
+import { Link} from "react-router-dom";
 
 
 class LogIn extends Component{
@@ -36,27 +37,70 @@ class LogIn extends Component{
             document.getElementById("status").innerText="Invalid Credentials";
         })
     }
+
+
     render(){
+        const headerfont = {
+            color: "black",
+            fontFamily: "Courier"
+        };
+
         return(
-            <Form className ="LogIn">
-            <h1>Log In</h1>
+ 
+            <section id ="LogIn my-4 mx-5">
+                <div class = "container">
+                    <div class = "row no-gutters" id = "loginDesign">
+                        <div class = "col-lg-5">
+                            <img id = "loginPic" src="login-image.png" class = "img-fluid" alt=""></img>
+                        </div>
+                        <div class="col-lg-7 px-5 pt-5">
+                            <h1>Log In</h1>
+                            <h4 >Sign into your account</h4>
+                            <form>
+                                <div class="form-row">
+                                    <div class="col-lg-7">
+                                        <input type="text" id="unameLogIn" placeholder = "Email" name="uname" class = "form-control my-2 p-3"></input>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-7">
+                                        <input type="password" id="pwordLogIn" placeholder = "Password" name="pword" class = "form-control my-2 p-3"></input>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-7">
+                                        <button type="submit" value="Log In" onClick={this.logIn} id="btn1Login" class="btn1 mt-3 mb-3">Log In</button>
+                                        {/* <input  type="submit" value="Log In" onClick={this.logIn}></input> */}
+                                    </div>
+                                </div>
+                                {/* <a href = "#">Forgot password?</a> */}
+                                <Link to="signUp">
+                                <p>Don't have an account?<a href="#">  Register here</a></p>
+                                {/* <li style={headerfont}><h5>Sign Up</h5> </li> */}
+                                </Link>
+                                
+                            </form>
+                        </div>
+
+            {/* 
                 <FormGroup>
                 <label for="uname"> Username  </label>
                 <br></br>
-                <input type="text" id="unameLogIn" name="uname"></input>
                 </FormGroup>
                
                 <FormGroup>
                 <label for="pword"> Password  </label>
                 <br></br>
-                <input type="password" id="pwordLogIn" name="pword"></input>
                 </FormGroup>
                 
                 <FormGroup>
                 <input type="submit" value="Log In" onClick={this.logIn}></input>
                 </FormGroup>
-                <h3 id = "status"></h3>
-            </Form>
+                 */}
+                 <h3 id = "status"></h3>
+                    </div>
+                </div>
+            </section>
 
         );
     }

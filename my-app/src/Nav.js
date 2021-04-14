@@ -18,15 +18,18 @@ class Nav extends Component{
             <nav class = "navbar sticky-top navbar-light bg-dark"> 
             <div class = "fancy">
                 <h2 style={headerfont}> 
+                {/* how to take out the blue */}
+                    <   Link to="/">
                     <span class="txt-type" data-wait="3000" data-words='["codeBlack"]'> </span>
+                    
+                        {/* <li style={headerfont}><h5>Home</h5></li> */}
+                    </Link>
                 </h2>
             </div>
 
            
             <ul className="navLinks">
-                <Link to="/">
-                <li style={headerfont}><h5>Home</h5></li>
-                </Link>
+                
 
                 <Link to="/discussion">
                 <li style={headerfont}><h5>Discussion Board</h5></li>
@@ -36,9 +39,9 @@ class Nav extends Component{
                     <li style={headerfont}><h5>Resources</h5></li>
                 </Link>
  
-                <Link to="signUp">
+                {/* <Link to="signUp">
                 <li style={headerfont}><h5>Sign Up</h5> </li>
-                </Link>
+                </Link> */}
  
                 <Link to="logIn">
                 <li style={headerfont}><h5>Log in</h5></li>

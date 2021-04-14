@@ -86,7 +86,7 @@ function Discussion() {
         
             <div>
             <form id="tempNameForm">
-                <label>Name:</label>
+                <label>Name: </label>
                 <input type="text" name="name" value={state.name} onChange={onTextChange}></input>
             </form>
             <ChatWindow renderChat={renderChat()} state={state}></ChatWindow>

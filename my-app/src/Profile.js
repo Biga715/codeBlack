@@ -47,20 +47,58 @@ class Profile extends Component{
 
     render(){
         return(
-        <div id="profile">
-            
-            <div id="profileContainer">
-               <img id= "avatar" src ="defaultuser.png"></img>
-               <h2 id="username"></h2>
-               <h2 id="name">Name: </h2>
-               <h2 id="year">Year: </h2>
-               <h2 id="major">Major: </h2>
-               <h2 id="skills">Skills: </h2>
-               <h2 id="bio">About Me: </h2>
+        <section id ="profile my-4 mx-5">
+            <div class = "profileContainer">
+                <div class = "row no-gutters" id = "profileDesign">
+                    <div class = "col-lg-5">
+                        <img id= "avatar" src ="defaultuser.png" class = "img-fluid mt-3 mb-3 mx-4" alt=""></img>
+                    </div>
+                  <div class="col-lg-7 px-5 pt-5">
+
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <h1 id="name">My Name is </h1>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <h5 id="username"> </h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <h5 id="year">Year: </h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <h5 id="major">Major: </h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <h5 id="skills">Skills: </h5>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                     <h5 id="bio">About Me: </h5>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <button type="submit" onClick={this.logout} value="Logout" id="btn1Logout" class="btn1 mt-3 mb-3">Log Out</button>
                {/* <input type="submit" onClick={this.getProfileData} value="Get Data"></input> */}
-               <input type="submit" onClick={this.logout} value="Logout" id="logout"></input>
-            </div>
+               </div>
+                </div>
+                
+
+            <h3 id = "status"></h3>
         </div>
+    </div>
+</div>
+</section>        
         );
         
     }

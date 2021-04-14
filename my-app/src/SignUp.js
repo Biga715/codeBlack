@@ -54,47 +54,109 @@ class SignUp extends Component{
       }
 
     render(){
-        return(
-            <div id="signUpContainer">
-            <h1>Sign Up</h1>
-            
-            
-            <form id="signUpForm" >
-                <label for="fname" > Full Name:</label><br></br>
-                <input type="text" id="fname" name="fname"></input><br></br>
+      const headerfont = {
+        color: "black",
+        fontFamily: "Courier"
+      };  
+      return(
+        <section id ="signUpBox my-4 mx-5">
+            <div class = "container">
+                <div class = "row no-gutters" id = "signUpDesign">
+                <div class = "col-lg-5" id = "defaultUserPicBox">
+                            <img id = "signUpImage" src="signup-image.png" class = "img-fluid" alt=""></img>
+                        </div>
+                  <div class="col-lg-7 px-5 pt-5">
+                  <h1>Sign Up</h1>
+                  <h4 >Make your new account</h4>
+                  <form>
 
-                <label for="uname"> Username:</label><br></br>
-                <input type="text" id="uname" name="uname"></input><br></br>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="fname" name="fname" placeholder = "Full Name" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="uname" name="uname" placeholder = "Username" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="email" name="email" placeholder = "Email" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="grade" name="grade" placeholder = "Academic Year" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="major" name="major" placeholder = "Major" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="bio" name="bio" placeholder = "Bio" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="text" id="skills" name="skills" placeholder = "Skills" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="password" id="pword" name="pword" placeholder = "Password" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <input type="password" id="cpword" name="cpword" placeholder = "Confirm Password" class = "form-control my-2 p-3"></input>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-7">
+                        <button type="submit" value="Sign Up" onClick={this.signUp} id="btn1SignUp" class="btn1 mt-3 mb-3">Sign Up</button>
+                        {/* <input type="submit" onClick={this.signUp} value="Sign Up"></input> */}
+                    </div>
+                </div>
+                
 
-                <label for="email"> Email:</label><br></br>
-                <input type="text" id="email" name="email"></input><br></br>
+                {/* <label for="fname" > Full Name:</label><br></br>
+                <></input><br></br> */}
 
-                <label for="grade"> Academic Year:</label><br></br>
-                <input type="text" id="grade" name="grade"></input><br></br>
+                {/* <label for="uname"> Username:</label><br></br>
+                <></input><br></br> */}
 
-                <label for="major"> Major:</label><br></br>
-                <input type="text" id="major" name="major"></input><br></br>
+                {/* <label for="email"> Email:</label><br></br>
+                <input type="text" id="email" name="email"></input><br></br> */}
 
-                <label for="bio"> Bio:</label><br></br>
-                <input type="text" id="bio" name="bio"></input><br></br>
+                {/* <label for="grade"> Academic Year:</label><br></br>
+                <input type="text" id="grade" name="grade"></input><br></br> */}
 
-                <label for="skills"> Skills:</label><br></br>
-                <input type="text" id="skills" name="skills"></input><br></br>
+                {/* <label for="major"> Major:</label><br></br>
+                <input type="text" id="major" name="major"></input><br></br> */}
 
-                <label for="pword"> Password:</label><br></br>
-                <input type="password" id="pword" name="pword"></input><br></br>
+                {/* <label for="bio"> Bio:</label><br></br>
+                <input type="text" id="bio" name="bio"></input><br></br> */}
 
-                <label for="cpword"> Confirm Password:</label><br></br>
-                <input type="password" id="cpword" name="cpword"></input><br></br>
+                {/* <label for="skills"> Skills:</label><br></br>
+                <input type="text" id="skills" name="skills"></input><br></br> */}
 
+                {/* <label for="pword"> Password:</label><br></br>
+                <input type="password" id="pword" name="pword"></input><br></br> */}
 
+                {/* <label for="cpword"> Confirm Password:</label><br></br>
+                <input type="password" id="cpword" name="cpword"></input><br></br> */}
 
-                <input type="submit" onClick={this.signUp} value="Sign Up"></input>
-            </form>
             <h3 id = "status"></h3>
-
-
+            </form>
         </div>
+    </div>
+</div>
+</section>
+
         );
     }
 }

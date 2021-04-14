@@ -125,7 +125,7 @@ const TypeWriter = function(txtElement, words, wait = 3000){
   this.wait = parseInt(wait, 10);
   this.type();
   this.isDeleting = false;
-  this.counter = 0;
+  //this.counter = 0;
 }
 
 //Type method
@@ -149,7 +149,7 @@ TypeWriter.prototype.type = function(){
       let typeSpeed = 300;
       if(this.isDeleting){
         typeSpeed /= 2;
-        this.counter++;
+        //3this.counter++;
       }
       //Is word is complete
       if(!this.isDeleting && this.txt === fullTxt){
@@ -165,10 +165,10 @@ TypeWriter.prototype.type = function(){
         //Pause before start typing
         typeSpeed = 500;
       }
-      else if(this.txt === fullTxt && this.counter > 2){
-        //I want it to end here;
-        typeSpeed = 10000000;
-      }
+      // else if(this.txt === fullTxt && this.counter > 2){
+      //   //I want it to end here;
+      //   typeSpeed = 10000000;
+      // }
   
     
     setTimeout(() => this.type(), typeSpeed);

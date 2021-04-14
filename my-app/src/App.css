@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 body{
@@ -9,20 +9,21 @@ body{
 }
 
 
-
-.fancy{
-  display: flex;
-  margin-left: 10px;
-}
-
-/*Cursor*/
-/* Cursor */
-.txt-type > .txt {
-  border-right: 0.2rem solid rgb(255, 254, 254);
+/* Home.js */
+#picBanner{
+  text-align: center;
 }
 
 
 /*CSS for Nav.js*/
+.fancy{
+  display: flex;
+  margin-left: 10px;
+}
+/*Cursor*/
+.txt-type > .txt {
+  border-right: 0.2rem solid rgb(255, 254, 254);
+}
 nav{
   display: flex;
   justify-content: space-around;
@@ -94,10 +95,87 @@ a{
 
 }
 
+#loginDesign{
+  background-color: rgb(221, 203, 191);
+  border-radius: 30px;
+  margin-top: 60px;
+}
 
+#loginPic{
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
 
+#btn1Login{
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+}
+#btn1Login:hover{
+  background: white;
+  border: 1px solid;
+  color: black;
+}
 
+/*CSS for SignUp.js*/
+#signUpDesign{
+  background-color: rgb(221, 203, 191);
+  border-radius: 30px;
+  margin-top: 10px;
+}
 
+#signUpImage{
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+#btn1SignUp{
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+#btn1SignUp:hover{
+  background: white;
+  border: 1px solid;
+  color: black;
+}
+
+/*CSS for Profile.js*/
+#profileDesign{
+  background-color: rgb(221, 203, 191);
+  border-radius: 30px;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#btn1Logout{
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+#btn1Logout:hover{
+  background: white;
+  border: 1px solid;
+  color: black;
+}
 
 /* CSS for ChatWindow.js */
 #chatWindow{

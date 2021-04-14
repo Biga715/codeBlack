@@ -24,7 +24,7 @@ class Home extends Component {
             return(
                         // out of line, gif banner, animate title
             <div id="picBanner">
-                <img id = "bannerPic"src="banner3.png" alt="our logo"></img>
+                <img id = "bannerPic" src="banner3.png" alt="our logo"></img>
                 <br></br>
                 <h1 style={mystyle}>Mission Statement</h1>
                 <div>
