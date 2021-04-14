@@ -9,6 +9,7 @@ import Nav from './Nav';
 import Discussion from './Discussion';
 import Home from './Home';
 import Profile from './Profile';
+import Resources from './Resources';
 import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {Button, Form, FormGroup, Label, Input}  from 'reactstrap';
@@ -217,22 +218,6 @@ const onMessageSubmit = (e) => {
 const onTextChange = (e) => {
   setState({...state, [e.target.name]: e.target.value })
 }
-/*
-const renderChat = () => {
-  console.log("render chat");
-  console.log(chat);
-  return chat.map(({ name, message}, index) =>(
-    <div key={index}>
-       {name}: {message}
-    </div>
-  ))
-}
-*/
-/*
-      <div id="renderChat">
-        {renderChat()}
-      </div>
-      */
 
 
 
@@ -246,6 +231,7 @@ return (
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/logIn" component={LogIn}></Route>
       <Route path="/profile" component={Profile}></Route>
+      <Route path="/resources" component ={Resources}></Route>
     </div>
   </Router>
 
