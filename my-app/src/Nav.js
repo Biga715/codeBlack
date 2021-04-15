@@ -12,14 +12,17 @@ class Nav extends Component{
     render(){
         const headerfont = {
             color: "white",
-            fontFamily: "Courier"
+            fontFamily: "Courier",
+            textDecoration: "none"
+
         };
+        
         return(
             <nav class = "navbar sticky-top navbar-light bg-dark"> 
             <div class = "fancy">
                 <h2 style={headerfont}> 
                 {/* how to take out the blue */}
-                    <   Link to="/">
+                    <Link to="/" style={{color:"white", textDecoration: 'none' }}> 
                     <span class="txt-type" data-wait="3000" data-words='["codeBlack"]'> </span>
                     
                         {/* <li style={headerfont}><h5>Home</h5></li> */}
@@ -31,11 +34,11 @@ class Nav extends Component{
             <ul className="navLinks">
                 
 
-                <Link to="/discussion">
+                <Link to="/discussion" style={{ textDecoration: 'none' }}>
                 <li style={headerfont}><h5>Discussion Board</h5></li>
                 </Link>
 
-                <Link to="/resources">
+                <Link to="/resources" style={{ textDecoration: 'none' }}>
                     <li style={headerfont}><h5>Resources</h5></li>
                 </Link>
  
@@ -43,11 +46,11 @@ class Nav extends Component{
                 <li style={headerfont}><h5>Sign Up</h5> </li>
                 </Link> */}
  
-                <Link to="logIn">
+                <Link to="logIn" style={{ textDecoration: 'none' }}>
                 <li style={headerfont}><h5>Log in</h5></li>
                 </Link>
                 
-                <Link to="profile">
+                <Link to="profile" style={{ textDecoration: 'none' }}>
                 <li style={headerfont}><h5>Profile</h5></li>
                 </Link>
 

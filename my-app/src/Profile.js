@@ -51,47 +51,36 @@ class Profile extends Component{
             <div class = "profileContainer">
                 <div class = "row no-gutters" id = "profileDesign">
                     <div class = "col-lg-5">
+                        <img id= "profileImage" src ="profile-image.png" class = "img-fluid" alt=""></img>
                         <img id= "avatar" src ="defaultuser.png" class = "img-fluid mt-3 mb-3 mx-4" alt=""></img>
                     </div>
                   <div class="col-lg-7 px-5 pt-5">
 
-                <div class="form-row">
                     <div class="col-lg-7">
                         <h1 id="name">My Name is </h1>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col-lg-7">
                         <h5 id="username"> </h5>
                     </div>
-                </div>
-                <div class="form-row">
+
                     <div class="col-lg-7">
                         <h5 id="year">Year: </h5>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col-lg-7">
                         <h5 id="major">Major: </h5>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col-lg-7">
                         <h5 id="skills">Skills: </h5>
                     </div>
-                </div>
-                <div class="form-row">
+        
                     <div class="col-lg-7">
                      <h5 id="bio">About Me: </h5>
 
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col-lg-7">
                         <button type="submit" onClick={this.logout} value="Logout" id="btn1Logout" class="btn1 mt-3 mb-3">Log Out</button>
                {/* <input type="submit" onClick={this.getProfileData} value="Get Data"></input> */}
                </div>
-                </div>
                 
 
             <h3 id = "status"></h3>

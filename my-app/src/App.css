@@ -46,7 +46,10 @@ LogIn{
 a{
   color: white;
   text-decoration: none;
+  color: inherit;
 }
+
+
 
 .navLinks{
   width: 50%;
@@ -106,6 +109,8 @@ a{
   border-bottom-left-radius: 30px;
 }
 
+
+
 #btn1Login{
   border: none;
   outline: none;
@@ -116,6 +121,7 @@ a{
   border-radius: 4px;
   font-weight: bold;
 }
+
 #btn1Login:hover{
   background: white;
   border: 1px solid;
@@ -151,6 +157,8 @@ a{
   color: black;
 }
 
+
+
 /*CSS for Profile.js*/
 #profileDesign{
   background-color: rgb(221, 203, 191);
@@ -158,6 +166,19 @@ a{
   margin-top: 50px;
   margin-left: 50px;
   margin-right: 50px;
+}
+
+#profileImage{
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  position: relative;
+}
+
+#avatar{
+  position: absolute;
+  width: 25%;
+  top: 50px;
+  left: 140px;
 }
 
 #btn1Logout{

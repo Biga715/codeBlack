@@ -125,7 +125,8 @@ const TypeWriter = function(txtElement, words, wait = 3000){
   this.wait = parseInt(wait, 10);
   this.type();
   this.isDeleting = false;
-  //this.counter = 0;
+  this.counter = 0;
+  this.stop = false;
 }
 
 //Type method
@@ -135,7 +136,7 @@ TypeWriter.prototype.type = function(){
     //Get full text of current word
     const fullTxt = this.words[current];
     //Check if deleting
-    if(this.isDeleting){
+    if(this.isDeleting && !this.stop){
       //Remove char
       this.txt = fullTxt.substring(0, this.txt.length - 1);
     }
@@ -149,15 +150,20 @@ TypeWriter.prototype.type = function(){
       let typeSpeed = 300;
       if(this.isDeleting){
         typeSpeed /= 2;
-        //3this.counter++;
       }
       //Is word is complete
       if(!this.isDeleting && this.txt === fullTxt){
         //Make pause at end
         typeSpeed = this.wait;
         //Set delete to true
-        this.isDeleting = true
+        this.isDeleting = true;
+        this.counter++;
+        if(this.counter === 2) {
+          console.log("Second iteration is done!");
+          this.stop = true;
+        }
       }
+      console.log(this.counter);
       if(this.isDeleting && this.txt === ''){
         this.isDeleting = false;
         //Move to the next word
