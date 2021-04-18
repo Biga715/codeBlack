@@ -6,7 +6,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
-// const session = require('express-session');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const user = require('./models/users');
 const profile = require('./models/profile');
 // const { profile } = require('console');
@@ -15,6 +16,7 @@ const request = require('request');
 //const upload = require('./upload');
 
 var currentUser = "";
+var currentSession;
 
 app.use(cors());
 app.use(morgan('tiny'));
@@ -23,13 +25,28 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+// const connection = mongoose.createConnection(mongoUri, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+// });
 
-// app.use(session({
-//     secret: 'secret-key',
-//     // cookie: { maxAge: 60000 },
-//     resave: false,
-//     saveUninitialized: false
-// }));
+const sessionStore = new MongoStore({
+    mongoUrl: 'mongodb+srv://admin:adminUser@cluster0.lzoai.mongodb.net/codeBlack?retryWrites=true&w=majority',
+    collection: 'sessions'
+})
+app.use(session({
+    name: 'sid',
+    resave: false,
+    saveUninitialized: false,
+    secret: 'secret-key',
+    cookie: { 
+        maxAge: 1000 * 60 * 60 * 24,
+        // sameSite: true
+    },
+    store: sessionStore
+}));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -48,7 +65,25 @@ app.use((req, res, next) => {
     )
   });
 
-app.get('/', (req, res) => res.send('hey!'));
+app.get('/', (req, res) => {
+    console.log(req.sessionID);
+    res.send('hey!')
+});
+app.get('/profile', (req, res) => {
+    console.log(req.sessionID)
+    
+});
+app.get('/login', (req, res) => {
+    
+});
+app.get('/signup', (req, res) => {
+    
+});
+app.post('/logout', (req, res) => {
+    
+});
+
+
 
 //upload file
 //app.post('/upload', upload);
@@ -101,6 +136,11 @@ app.post('/signup', (req, res, next) => {
         password: req.body.password
     })
     console.log(new_user);
+    if(req.body.password != req.body.confirm){
+        return res.status(400).json({
+            msg: "Passwords do not match."
+        })
+    }
     new_user.save(err => {
         if(err){
             return res.status(400).json({
@@ -159,12 +199,23 @@ app.post('/login', (req, res, next) => {
             let check= bcrypt.compareSync(req.body.password, users.password);
             console.log("Password Check: " + check);
             if (check){
-                currentUser = req.body.username;
+                // currentUser = req.body.username;
                 console.log("current user:" + currentUser);
+                // mongoUri.collection('sessions').findOne({_id: req.sessionID}, (err, results) =>{
+                //     if(err){
+                //         return res.status(500).json({
+                //             msg: "something went wrong",
+                //             success: false
+                //         })
+                //     }
+                //     else{
+                //         console.log("successsss");
+                //     }
+                // });
                 // req.session.currentUser = req.body.username;
                 // currentUser = req.session.currentUser;
                 // console.log("current user: " + req.session.currentUser);
-                // console.log("session id: " + req.sessionID);
+                console.log("session id: " + req.sessionID);
                 return res.status(200).json({
                     msg: "You've successfully logged in!",
                     success: true
@@ -225,7 +276,7 @@ app.post('/profile', (req, res, next) => {
 app.get('/getProfileData', (req,res,next)=> {
     // let public = 'public';
     // console.log("session user: " + req.session.currentUser);
-    // console.log("session id on profile: " + req.sessionID);
+    console.log("session id on profile: " + req.sessionID);
     //get public post
     profile.find({ username: currentUser }, (err, profile) => {
         if(err)return console.log(err)

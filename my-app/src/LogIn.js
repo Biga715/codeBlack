@@ -59,7 +59,7 @@ class LogIn extends Component{
                             <form>
                                 <div class="form-row">
                                     <div class="col-lg-7">
-                                        <input type="text" id="unameLogIn" placeholder = "Email" name="uname" class = "form-control my-2 p-3"></input>
+                                        <input type="text" id="unameLogIn" placeholder = "Username" name="uname" class = "form-control my-2 p-3"></input>
                                     </div>
                                 </div>
                                 <div class="form-row">

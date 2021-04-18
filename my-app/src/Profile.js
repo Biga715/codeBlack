@@ -17,7 +17,7 @@ class Profile extends Component{
                 // console.log(res);
                 this.profile = res.data[0];
                 console.log(this.profile);
-                document.getElementById("logout").style.visibility = "hidden";
+                // document.getElementById("btn1Logout").style.visibility = "hidden";
                 if(this.profile != null){
                     document.getElementById("username").textContent = this.profile.username;
                     document.getElementById("name").textContent = "Name: " + this.profile.name;
@@ -25,7 +25,7 @@ class Profile extends Component{
                     document.getElementById("major").textContent = "Major: " + this.profile.major;
                     document.getElementById("skills").textContent = "Skills: " + this.profile.skills;
                     document.getElementById("bio").textContent = "About Me: " + this.profile.bio;
-                    document.getElementById("logout").style.visibility = "visible";
+                    // document.getElementById("logout").style.visibility = "visible";
                 }
             })
     }

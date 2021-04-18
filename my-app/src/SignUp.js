@@ -32,6 +32,7 @@ class SignUp extends Component{
           username: document.getElementById("uname").value,
           email: document.getElementById("email").value,
           password: document.getElementById("pword").value,
+          confirm: document.getElementById('cpword').value,
           fullName: document.getElementById("fname").value,
           grade: document.getElementById("grade").value,
           bio: document.getElementById("bio").value,
