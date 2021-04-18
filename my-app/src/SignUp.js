@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import AuthApi from './AuthApi';
 /*
 
     
@@ -23,7 +24,7 @@ class SignUp extends Component{
         super(props);
         this.signUp = this.signUp.bind(this);
     }
-
+    static contextType = AuthApi;
 
     signUp(event) {
         event.preventDefault();
@@ -44,6 +45,9 @@ class SignUp extends Component{
           .then(res => {
             console.log(res);
             this.error = '';
+            if(res.data.auth){
+                this.context.setAuth(true);
+            }
             document.getElementById("status").innerText=res.data.msg;
             // this.$router.push('/login');
           }, err => {

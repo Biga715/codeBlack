@@ -14,6 +14,9 @@ import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {Button, Form, FormGroup, Label, Input}  from 'reactstrap';
 import {FacebookLoginButton} from 'react-social-login-buttons';
+import Routes from './Routes';
+import AuthApi from './AuthApi';
+import hasSignedIn from './checkSignin';
 
 const SERVER = "http://localhost:4000";
 var socket = socketClient(SERVER);
@@ -226,20 +229,26 @@ const onTextChange = (e) => {
 }
 
 
+const [auth, setAuth] = useState(false);
 
+const readSession = async() =>{
+  const res = await hasSignedIn();
+  console.log(res);
+  if(res.data.auth){
+    setAuth(true);
+  }
+}
+useEffect(() => {readSession();}, []);
 return (
-      
+   
+  <AuthApi.Provider value={{auth, setAuth}}>
   <Router>
     <div className="App">
       <Nav></Nav>
-      <Route path="/" exact component={Home}></Route>
-      <Route path="/discussion" component={Discussion}></Route>
-      <Route path="/signUp" component={SignUp}></Route>
-      <Route path="/logIn" component={LogIn}></Route>
-      <Route path="/profile" component={Profile}></Route>
-      <Route path="/resources" component ={Resources}></Route>
+      <Routes />
     </div>
   </Router>
+  </AuthApi.Provider>
 
 );
 }

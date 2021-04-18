@@ -66,22 +66,31 @@ app.use((req, res, next) => {
   });
 
 app.get('/', (req, res) => {
-    console.log(req.sessionID);
     res.send('hey!')
 });
-app.get('/profile', (req, res) => {
-    console.log(req.sessionID)
-    
+app.get('/hasSignedIn', (req, res) => {
+    if(req.session.user){
+        res.json({
+            auth: true,
+            msg: "you are signed in"
+        })
+    }   
+    else{
+        return res.json({
+            auth: false,
+            msg: "you are not signed in"
+        })
+    } 
 });
-app.get('/login', (req, res) => {
+// app.get('/login', (req, res) => {
     
-});
-app.get('/signup', (req, res) => {
+// });
+// app.get('/signup', (req, res) => {
     
-});
-app.post('/logout', (req, res) => {
+// });
+// app.post('/logout', (req, res) => {
     
-});
+// });
 
 
 
@@ -135,6 +144,7 @@ app.post('/signup', (req, res, next) => {
         email: req.body.email,
         password: req.body.password
     })
+    req.session.user = user._id;
     console.log(new_user);
     var regex = new RegExp("^[a-zA-Z0-9+_.-]+@wustl.edu$");
     var emailCheck = regex.test(req.body.email);
@@ -155,7 +165,8 @@ app.post('/signup', (req, res, next) => {
             })
         }
         return res.status(200).json({
-            msg: "You've successfully signed up!"
+            msg: "You've successfully signed up and have been logged in!",
+            auth: true
         })
     })
 
@@ -208,6 +219,7 @@ app.post('/login', (req, res, next) => {
             if (check){
                 // currentUser = req.body.username;
                 console.log("current user:" + currentUser);
+                req.session.user = user._id;
                 // mongoUri.collection('sessions').findOne({_id: req.sessionID}, (err, results) =>{
                 //     if(err){
                 //         return res.status(500).json({
@@ -219,12 +231,14 @@ app.post('/login', (req, res, next) => {
                 //         console.log("successsss");
                 //     }
                 // });
-                // req.session.currentUser = req.body.username;
-                // currentUser = req.session.currentUser;
+                req.session.currentUser = req.body.username;
+                currentUser = req.session.currentUser;
                 // console.log("current user: " + req.session.currentUser);
                 console.log("session id: " + req.sessionID);
                 return res.status(200).json({
                     msg: "You've successfully logged in!",
+                    user: users,
+                    auth: true,
                     success: true
                 })
                 // return res.json(req.session);
@@ -296,17 +310,10 @@ app.get('/getProfileData', (req,res,next)=> {
 
 //logout
 app.get('/logout', (req,res,next)=> {
-    // currentUser = "";
-    if (currentUser == ""){
-        return res.status(400).json({
-            msg: 'Not logged in.'
-        })
-    }
-    else{
-        currentUser = ""
-        return res.status(200).json({
-            msg: "Successfully logged out"
-        })
-    }
+    req.session.destroy();
+    console.log("session destroyed");
+    res.json({
+        auth: false
+    })
     
 })

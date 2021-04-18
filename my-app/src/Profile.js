@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import AuthApi from './AuthApi';
 
 
 //TODO: Import profile database and display information
@@ -11,6 +12,7 @@ class Profile extends Component{
         this.getProfileData = this.getProfileData.bind(this);
         this.logout = this.logout.bind(this);
     }
+    static contextType = AuthApi;
     getProfileData(){
         axios.get('http://localhost:4000/getProfileData' )
             .then(res => {
@@ -30,18 +32,18 @@ class Profile extends Component{
             })
     }
     logout(){
-        axios.get('http://localhost:4000/logout' )
-            .then(res => {
-                console.log(res);
-                document.getElementById("username").textContent = "";
-                document.getElementById("name").textContent = "Name: ";
-                document.getElementById("year").textContent = "Year: ";
-                document.getElementById("major").textContent = "Major: ";
-                document.getElementById("skills").textContent = "Skills: ";
-                document.getElementById("bio").textContent = "About Me: ";
-                this.props.history.push('/LogIn');
-            })
+        axios.get('http://localhost:4000/logout')
+        .then(res => {
+            console.log(res);
+        })
             // this.props.history.push('/LogIn');
+        document.getElementById("username").textContent = "";
+        document.getElementById("name").textContent = "Name: ";
+        document.getElementById("year").textContent = "Year: ";
+        document.getElementById("major").textContent = "Major: ";
+        document.getElementById("skills").textContent = "Skills: ";
+        document.getElementById("bio").textContent = "About Me: ";
+        this.context.setAuth(false);
     }
 
 

@@ -4,6 +4,7 @@ import {Button, Form, FormGroup, Label, Input}from 'reactstrap';
 import {FacebookLoginButton} from 'react-social-login-buttons';
 import axios from 'axios';
 import { Link} from "react-router-dom";
+import AuthApi from './AuthApi';
 
 
 class LogIn extends Component{
@@ -11,10 +12,11 @@ class LogIn extends Component{
         super(props);
         this.logIn = this.logIn.bind(this);
     }
-
+    static contextType = AuthApi;
 
 
     logIn(event){
+        // const authApi = React.useContext(AuthApi);
         event.preventDefault();
         let user = {
           username: document.getElementById("unameLogIn").value,
@@ -23,9 +25,13 @@ class LogIn extends Component{
         axios.post('http://localhost:4000/login', user)
         .then(res => {
             // console.log(res);
-            //if it works
+            // if it works
             if(res.status === 200){
-                console.log(res.data.msg)
+                // console.log(res.data.user);
+                if(res.data.auth){
+                    this.context.setAuth(true);
+                }
+                console.log(res.data.msg);
                 // localStorage.setItem('token', res.data.token);
                 document.getElementById("status").innerText=res.data.msg;
                 // this.$router.push('/home');
@@ -37,6 +43,7 @@ class LogIn extends Component{
             document.getElementById("status").innerText="Invalid Credentials";
         })
     }
+    
 
 
     render(){
@@ -44,6 +51,7 @@ class LogIn extends Component{
             color: "black",
             fontFamily: "Courier"
         };
+        
 
         return(
  
@@ -105,5 +113,34 @@ class LogIn extends Component{
         );
     }
 }
+// function HandleLogin(event){
+//         const authApi = React.useContext(AuthApi);
+
+//         event.preventDefault();
+//         let user = {
+//           username: document.getElementById("unameLogIn").value,
+//           password: document.getElementById("pwordLogIn").value
+//         }
+//         axios.post('http://localhost:4000/login', user)
+//         .then(res => {
+//             // console.log(res);
+//             // if it works
+//             if(res.status === 200){
+//                 // console.log(res.data.user);
+//                 if(res.data.auth){
+//                     authApi.setAuth(true);
+//                 }
+//                 console.log(res.data.msg);
+//                 // localStorage.setItem('token', res.data.token);
+//                 document.getElementById("status").innerText=res.data.msg;
+//                 // this.$router.push('/home');
+//             }
+//         }, err => {
+//             this.error = err.response.data.msg;
+//             console.log(this.error);
+//             // console.log(err);
+//             document.getElementById("status").innerText="Invalid Credentials";
+//         })
+// }
 
 export default LogIn;
