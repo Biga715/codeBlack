@@ -136,6 +136,13 @@ app.post('/signup', (req, res, next) => {
         password: req.body.password
     })
     console.log(new_user);
+    var regex = new RegExp("^[a-zA-Z0-9+_.-]+@wustl.edu$");
+    var emailCheck = regex.test(req.body.email);
+    if(!emailCheck){
+        return res.status(400).json({
+            msg: "Invalid WUSTL email"
+        })
+    }
     if(req.body.password != req.body.confirm){
         return res.status(400).json({
             msg: "Passwords do not match."
