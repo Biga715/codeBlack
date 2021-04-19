@@ -1,94 +1,154 @@
 import React, { Component } from 'react';
 import './App.css';
 import Profile from './Profile';
+import { Link, Redirect} from "react-router-dom";
+import axios from 'axios';
+import AuthApi from './AuthApi';
+import session from 'express-session';
+// import { useHistory } from "react-router-dom";
+
 
 class EditProfile extends Component{
-     aUserProfileInfo = () => {
-        const theStartingProfile = {
-          id: null,
-          email: '',
-          firstname: '',
-          lastname: '',
-          username: '',
-          avatar: Image,
-          year: '',
-          major: '',
-          skills:'',
-          bio: '',
-        };
-        const [theProfileInformation, theEstablishedInformation] = useState(theStartingProfile);
-        const handleSave = (e) => {
-            e.preventDefault();
-            saveInfo();
-            setEdit(false);
-        };
-        //Need to be able to edit avatar, username, year, major, skills, bio 
+  constructor(props){
+    super(props);
+    this.getProfileData = this.getProfileData.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+}
+static contextType = AuthApi;
+getProfileData(){
+    let data = {
+        user: sessionStorage.getItem('currentUser')
+    };
+    console.log("profile user data: " + data.user)
+    axios.post('http://localhost:4000/getProfileData', data)
+        .then(res => {
+            // console.log(res);
+            this.profile = res.data[0];
+            console.log(this.profile);
+            // document.getElementById("btn1Logout").style.visibility = "hidden";
+            if(this.profile != null){
+                document.getElementById("editedUName").value = this.profile.username;
+                document.getElementById("editedName").value = this.profile.name;
+                document.getElementById("editedYear").value = this.profile.year;
+                document.getElementById("editedMajor").value = this.profile.major;
+                document.getElementById("editedSkills").value = this.profile.skills;
+                document.getElementById("editedBio").value = this.profile.bio;
+                // document.getElementById("logout").style.visibility = "visible";
+            }
+        })
+}
+updateProfile(){
+  // let history = useHistory();
+    let data = {
+      oldUsername: sessionStorage.getItem('currentUser'),
+      newUsername: document.getElementById("editedUName").value,
+      // email: document.getElementById("editedEmail").value,
+      // password: document.getElementById("editedPword").value,
+      // confirm: document.getElementById('editedCpword').value,
+      fullName: document.getElementById("editedName").value,
+      grade: document.getElementById("editedMajor").value,
+      bio: document.getElementById("editedBio").value,
+      skills: document.getElementById("editedSkills").value
+    }
+    console.log(data);
 
-        const processTheEdit = (e) => {
-            e.preventDefault();
-            //set edit to true when edit is clicked
-            setEdit(true);
-          };
+    axios.post('http://localhost:4000/updateProfile', data)
+    .then(res => {
+        console.log(res);
+        sessionStorage.setItem('currentUser', res.data.newUser);
+        document.getElementById("status").innerText="Profile Updated."
+    }, err =>{
+        console.log(err.response);
+        document.getElementById("status").innerText=err.response.data.msg;
+    })
 
-          const processRequestedChange = (event) => {
-            const { name, value } = event.target;
-            setInfo({ ...info, [name]: value });
-          };
-          const initiateTheInformationProvided = () => {
-            var data = {
-              email: info.email,
-              firstname: info.firstname,
-              lastname: info.lastname,
-              year: info.year,
-              major: info.major,
-              skills: info.skills,
-              bio: info.bio
+        // this.props.history.push('/LogIn');
+    // localStorage.clear();
+    // sessionStorage.clear();
+    document.getElementById("username").textContent = "Username: ";
+    document.getElementById("name").textContent = "My Name is ";
+    document.getElementById("year").textContent = "Year: ";
+    document.getElementById("major").textContent = "Major: ";
+    document.getElementById("skills").textContent = "Skills: ";
+    document.getElementById("bio").textContent = "About Me: ";
+    // <Redirect to="/profile"/>
+    // this.props.history.push('/profile');
+    // history.push('/profile');
+    // this.context.setAuth(false);
+}
+
+
+render(){
+    return(
+    <section id ="profile my-4 mx-5">
+        <div class = "profileContainer">
+            <div class = "row no-gutters" id = "profileDesign">
+                <div class = "col-lg-5">
+                    <img id= "profileImage" src ="profile-image.png" class = "img-fluid" alt=""></img>
+                    <img id= "avatar" src ="defaultuser.png" class = "img-fluid mt-3 mb-3 mx-4" alt=""></img>
+                </div>
+              <div class="col-lg-7 px-5 pt-5">
+
+                <div class="col-lg-7">
+                    <h1 id="name">My Name is </h1>
+                    <input id="editedName" type = "text"></input>
+                </div>
+                <div class="col-lg-7">
+                    <h5 id="username"> Username: </h5>
+                    <input id="editedUName" type = "text"></input>
+                </div>
+
+                <div class="col-lg-7">
+                    <h5 id="year">Year: </h5>
+                    <input id="editedYear" type = "text"></input>
+                </div>
+                <div class="col-lg-7">
+                    <h5 id="major">Major: </h5>
+                    <input id="editedMajor" type = "text"></input>
+                </div>
+                <div class="col-lg-7">
+                    <h5 id="skills">Skills: </h5>
+                    <input id="editedSkills" type = "text"></input>
+                </div>
+    
+                <div class="col-lg-7">
+                 <h5 id="bio">About Me: </h5>
+                 <input id="editedBio" type = "text"></input>
+                </div>
+                {/* <Link to="editProfile">
+                    <p>Need to make a change? <a href="#">Edit profile here.</a></p>
+                </Link> */}
+                <div class="col-lg-7">
+                  <br></br>
+                    <button type="submit" onClick={this.updateProfile} value="Update" id="btn1Logout" class="btn1 mt-3 mb-3">Update Profile</button>
+                    <h3 id="status"></h3>
+                    <Link to="profile">
+                        <p>Back to Profile Page</p>
+                    </Link>
+           {/* <input type="submit" onClick={this.getProfileData} value="Get Data"></input> */}
+           </div>
             
 
-
-            };
-            if (info.id === null) {
-                InfoDataService.create(data)
-                  .then((response) => {
-                    console.log('create', response.data);
-                    setInfo({
-                      id: response.data.id,
-                      email: response.data.email,
-                      firstname: response.data.firstname,
-                      lastname: response.data.lastname,
-                      year: response.data.year,
-                      major: response.data.year,
-                      skills: response.data.skills,
-                      bio: response.data.bio
-
-                    });
-                  })
-                  .catch((e) => {
-                    console.error(e);
-                  });
-              } else {
-                InfoDataService.update(info.id, data)
-                .then((response) => {
-                  console.log(response);
-                  setInfo({
-                    id: response.data.id,
-                    email: response.data.email,
-                    firstname: response.data.firstname,
-                    lastname: response.data.lastname,
-                    year: response.data.year,
-                    major: response.data.year,
-                    skills: response.data.skills,
-                    bio: response.data.bio
-
-                  });
-                  console.log(response.data);
-                })
-                .catch((e) => {
-                  console.error(e);
-                });
-            }
-        
-
-        }
-    }
+        <h3 id = "status"></h3>
+    </div>
+</div>
+</div>
+</section>        
+    );
+    
 }
+componentDidMount(){
+    this.getProfileData();
+
+    axios.get("http://localhost:4000/getUser")
+    .then(
+        res =>{
+            console.log(res);
+        },
+        err =>{
+            console.log(err);
+        }
+    )
+}
+}
+export default EditProfile;

@@ -10,6 +10,7 @@ import Discussion from './Discussion';
 import Home from './Home';
 import Profile from './Profile';
 import Resources from './Resources';
+import EditProfile from './EditProfile';
 import socketClient  from "socket.io-client";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {Button, Form, FormGroup, Label, Input}  from 'reactstrap';

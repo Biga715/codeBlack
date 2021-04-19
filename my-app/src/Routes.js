@@ -6,6 +6,7 @@ import Discussion from './Discussion';
 import Home from './Home';
 import Profile from './Profile';
 import Resources from './Resources';
+import EditProfile from './EditProfile';
 
 import AuthApi from './AuthApi';
 
@@ -18,6 +19,7 @@ function Routes() {
             <RouteRegistration path="/logIn" component={LogIn}></RouteRegistration>
             <RouteProtected path="/profile" component={Profile}></RouteProtected>
             <Route path="/resources" component ={Resources}></Route>
+            <RouteProtected path="/editProfile" component={EditProfile}></RouteProtected>
         </Switch>
     );
 }
@@ -30,7 +32,7 @@ const RouteRegistration = ({ component:Component, ...rest }) =>{
 
 const RouteProtected = ({ component:Component, ...rest }) =>{
     const authApi = React.useContext(AuthApi);
-    return(<Route {...rest} render={props => authApi.auth ? <Component {...props} /> : <Redirect to="logIn" />} />
+    return(<Route {...rest} render={props => authApi.auth ? <Component {...props} /> : <Redirect to="/logIn" />} />
     );
 };
 

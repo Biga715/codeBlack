@@ -358,6 +358,51 @@ app.post('/getProfileData', (req,res,next)=> {
     
 })
 
+//updateProfileData
+app.post('/updateProfile', (req, res, next)=>{
+    let oldUsername = req.body.oldUsername;
+    let username = req.body.newUsername;
+    let fullName = req.body.fullName;
+    let grade = req.body.grade;
+    let bio = req.body.bio;
+    let skills = req.body.skills;
+
+    if(oldUsername != username){
+        user.findOne({ username: username}, (err, users) =>{
+            if(users){
+                return res.status(400).json({
+                    msg: 'Username is already taken. Try again.'
+                })
+            }
+            else{
+                user.findOneAndUpdate({username: oldUsername}, {username: username}, (err, users)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log(users);
+                    }
+                })
+            }
+        })
+    }
+    
+    // sessionStorage.setItem('currentUser', username);
+    profile.findOneAndUpdate({username: oldUsername },  {"$set": { "username": username, "name": fullName, "major": grade, "bio": bio, "skills": skills}}, function (err, editedProfile) { 
+        if (err){ 
+            console.log(err) ;
+            res.status(500).send(err);
+        } 
+        else{ 
+            console.log("New Profile : ", editedProfile); 
+            return res.status(200).json({
+                newUser: username
+            })
+        } 
+    }); 
+})
+
+
 //logout
 app.get('/logout', (req,res,next)=> {
     req.session.destroy();

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import AuthApi from './AuthApi';
+import { Link} from "react-router-dom";
 
 
 //TODO: Import profile database and display information
@@ -25,8 +26,8 @@ class Profile extends Component{
                 console.log(this.profile);
                 // document.getElementById("btn1Logout").style.visibility = "hidden";
                 if(this.profile != null){
-                    document.getElementById("username").textContent = this.profile.username;
-                    document.getElementById("name").textContent = "Name: " + this.profile.name;
+                    document.getElementById("username").textContent = "Username: " + this.profile.username;
+                    document.getElementById("name").textContent = "My Name is " + this.profile.name;
                     document.getElementById("year").textContent = "Year: " + this.profile.year;
                     document.getElementById("major").textContent = "Major: " + this.profile.major;
                     document.getElementById("skills").textContent = "Skills: " + this.profile.skills;
@@ -43,8 +44,8 @@ class Profile extends Component{
             // this.props.history.push('/LogIn');
         localStorage.clear();
         sessionStorage.clear();
-        document.getElementById("username").textContent = "";
-        document.getElementById("name").textContent = "Name: ";
+        document.getElementById("username").textContent = "Username: ";
+        document.getElementById("name").textContent = "My Name is ";
         document.getElementById("year").textContent = "Year: ";
         document.getElementById("major").textContent = "Major: ";
         document.getElementById("skills").textContent = "Skills: ";
@@ -85,7 +86,11 @@ class Profile extends Component{
                      <h5 id="bio">About Me: </h5>
 
                     </div>
+                    <Link to="editProfile">
+                        <p>Need to make a change? <a href="#">Edit profile here.</a></p>
+                    </Link>
                     <div class="col-lg-7">
+                        <br></br>
                         <button type="submit" onClick={this.logout} value="Logout" id="btn1Logout" class="btn1 mt-3 mb-3">Log Out</button>
                {/* <input type="submit" onClick={this.getProfileData} value="Get Data"></input> */}
                </div>
