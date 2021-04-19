@@ -15,6 +15,7 @@ const request = require('request');
 //const { default: Home } = require('./my-app/src/Home');
 //const upload = require('./upload');
 var siofu = require("socketio-file-upload");
+const jsonwt = require('jsonwebtoken');
 
 var currentUser = "";
 var currentSession;
@@ -69,6 +70,30 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('hey!')
 });
+
+const verifyJWT = (req, res, next)=>{
+    const token = req.headers["x-access-token"]
+
+    if(!token){
+        res.send("We need a token")
+    }
+    else{
+        jsonwt.verify(token, "creativekey", (err, decoded)=>{
+            if(err){
+                res.json({ isAuth: false, msg: "failed to authenticate"})
+            }
+            else{
+                req.userId = decoded._id;
+                // console.log(req.session.user);
+                next();
+            }
+        })
+    }
+}
+
+app.get('/isUserAuth', verifyJWT, (req, res) =>{
+    res.send("You are authenticated");
+})
 app.get('/hasSignedIn', (req, res) => {
     if(req.session.user){
         res.json({
@@ -148,7 +173,6 @@ app.post('/signup', (req, res, next) => {
         email: req.body.email,
         password: req.body.password
     })
-    req.session.user = user._id;
     console.log(new_user);
     var regex = new RegExp("^[a-zA-Z0-9+_.-]+@wustl.edu$");
     var emailCheck = regex.test(req.body.email);
@@ -162,17 +186,23 @@ app.post('/signup', (req, res, next) => {
             msg: "Passwords do not match."
         })
     }
-    new_user.save(err => {
-        if(err){
-            return res.status(400).json({
-                msg: 'Username is already taken. Try again.'
+    else{
+        req.session.user = user._id;
+        currentUser = req.body.username;
+        let webtoken = jsonwt.sign({ user_id: users.user_id}, 'creativekey');
+        new_user.save(err => {
+            if(err){
+                return res.status(400).json({
+                    msg: 'Username is already taken. Try again.'
+                })
+            }
+            return res.status(200).json({
+                msg: "You've successfully signed up and have been logged in!",
+                token: webtoken
+                // auth: true
             })
-        }
-        return res.status(200).json({
-            msg: "You've successfully signed up and have been logged in!",
-            auth: true
         })
-    })
+    }
 
 });
 // Adding a new profile
@@ -181,7 +211,7 @@ app.post('/addProfile', (req, res, next) => {
         name: req.body.fullName,
         username: req.body.username,
         email: req.body.email,
-        major: req.body.major,
+        major: req.body.grade,
         year: req.body.grade,
         bio: req.body.bio,
         skills: req.body.skills
@@ -202,6 +232,7 @@ app.post('/addProfile', (req, res, next) => {
 
 app.post('/login', (req, res, next) => { 
     //if user is not found from the front end then user will be null
+    let loggedInUser;
     user.findOne({ username: req.body.username}, (err, users) =>{
         if(err) {
             return res.status(500).json({
@@ -224,6 +255,7 @@ app.post('/login', (req, res, next) => {
                 // currentUser = req.body.username;
                 console.log("current user:" + currentUser);
                 req.session.user = user._id;
+                loggedInUser = users;
                 // mongoUri.collection('sessions').findOne({_id: req.sessionID}, (err, results) =>{
                 //     if(err){
                 //         return res.status(500).json({
@@ -236,12 +268,14 @@ app.post('/login', (req, res, next) => {
                 //     }
                 // });
                 req.session.currentUser = req.body.username;
-                currentUser = req.session.currentUser;
+                // currentUser = req.session.currentUser;
                 // console.log("current user: " + req.session.currentUser);
                 console.log("session id: " + req.sessionID);
+                let webtoken = jsonwt.sign({ user_id: users._id}, 'creativekey');
                 return res.status(200).json({
                     msg: "You've successfully logged in!",
-                    user: users,
+                    token: webtoken,
+                    user: loggedInUser,
                     auth: true,
                     success: true
                 })
@@ -249,13 +283,14 @@ app.post('/login', (req, res, next) => {
             }else{
                 return res.status(400).json({
                     msg: "Invalid Password",
+                    auth: false,
+                    user: loggedInUser,
                     success: false
                 })
             }
         }
         
         // currentUser = req.body.username;
-        // let webtoken = jsonwt.sign({ user_id: users.user_id}, 'creativekey');
         // return res.status(200).json({
         //     title: 'login worked',
         //     token: webtoken,
@@ -263,7 +298,7 @@ app.post('/login', (req, res, next) => {
     })
 });
 // Adding a new profile
-app.post('/getCurrentUser', (req, res, next) => { 
+app.get('/getUser', (req, res, next) => { 
     let data = {
         currentuser: currentUser
     };
@@ -298,12 +333,13 @@ app.post('/profile', (req, res, next) => {
 });
 
 //get profile data
-app.get('/getProfileData', (req,res,next)=> {
+app.post('/getProfileData', (req,res,next)=> {
     // let public = 'public';
     // console.log("session user: " + req.session.currentUser);
+    let current = req.body.user;
     console.log("session id on profile: " + req.sessionID);
     //get public post
-    profile.find({ username: currentUser }, (err, profile) => {
+    profile.find({ username: current }, (err, profile) => {
         if(err)return console.log(err)
         console.log(profile);
         res.contentType('json');

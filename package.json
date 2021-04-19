@@ -10,6 +10,7 @@
     "mongoose": "^5.12.4",
     "morgan": "^1.10.0",
     "request": "^2.88.2",
-    "socket.io": "^4.0.1"
+    "socket.io": "^4.0.1",
+    "socketio-file-upload": "^0.7.3"
   }
 }
