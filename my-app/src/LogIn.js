@@ -24,15 +24,25 @@ class LogIn extends Component{
         }
         axios.post('http://localhost:4000/login', user)
         .then(res => {
-            // console.log(res);
+            console.log(res);
             // if it works
             if(res.status === 200){
-                // console.log(res.data.user);
+                // console.log(res.data.user)
+                localStorage.setItem('token', res.data.token);
+                sessionStorage.setItem('currentUser', res.data.user.username);
                 if(res.data.auth){
                     this.context.setAuth(true);
                 }
                 console.log(res.data.msg);
                 // localStorage.setItem('token', res.data.token);
+                axios.get("http://localhost:4000/isUserAuth",{
+                    headers:{
+                        "x-access-token": localStorage.getItem("token")
+                    }
+                })
+                .then((res) => {
+                    console.log(res);
+                });
                 document.getElementById("status").innerText=res.data.msg;
                 // this.$router.push('/home');
             }

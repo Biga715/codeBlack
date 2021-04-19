@@ -45,11 +45,20 @@ class SignUp extends Component{
           .then(res => {
             console.log(res);
             this.error = '';
-            if(res.data.auth){
-                this.context.setAuth(true);
-            }
+            // if(res.data.auth){
+            //     this.context.setAuth(true);
+            // }
             document.getElementById("status").innerText=res.data.msg;
-            // this.$router.push('/login');
+            localStorage.setItem('token', res.data.token);
+
+            axios.post('http://localhost:4000/addProfile', newUser)
+            .then(res => {
+                console.log(res);
+                this.context.setAuth(true);
+            }, err =>{
+                console.log(err.response);
+            })
+            // history.push('/login');
           }, err => {
             console.log(err.response);
             document.getElementById("status").innerText=err.response.data.msg;

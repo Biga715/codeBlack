@@ -14,7 +14,11 @@ class Profile extends Component{
     }
     static contextType = AuthApi;
     getProfileData(){
-        axios.get('http://localhost:4000/getProfileData' )
+        let data = {
+            user: sessionStorage.getItem('currentUser')
+        };
+        console.log("profile user data: " + data.user)
+        axios.post('http://localhost:4000/getProfileData', data)
             .then(res => {
                 // console.log(res);
                 this.profile = res.data[0];
@@ -37,6 +41,8 @@ class Profile extends Component{
             console.log(res);
         })
             // this.props.history.push('/LogIn');
+        localStorage.clear();
+        // sessionStorage.clear();
         document.getElementById("username").textContent = "";
         document.getElementById("name").textContent = "Name: ";
         document.getElementById("year").textContent = "Year: ";
@@ -95,6 +101,16 @@ class Profile extends Component{
     }
     componentDidMount(){
         this.getProfileData();
+
+        axios.get("http://localhost:4000/getUser")
+        .then(
+            res =>{
+                console.log(res);
+            },
+            err =>{
+                console.log(err);
+            }
+        )
     }
 }
 export default Profile;
