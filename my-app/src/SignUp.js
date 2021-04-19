@@ -50,6 +50,7 @@ class SignUp extends Component{
             // }
             document.getElementById("status").innerText=res.data.msg;
             localStorage.setItem('token', res.data.token);
+            sessionStorage.setItem('currentUser', res.data.user.username);
 
             axios.post('http://localhost:4000/addProfile', newUser)
             .then(res => {
@@ -57,8 +58,7 @@ class SignUp extends Component{
                 this.context.setAuth(true);
             }, err =>{
                 console.log(err.response);
-            })
-            // history.push('/login');
+            });
           }, err => {
             console.log(err.response);
             document.getElementById("status").innerText=err.response.data.msg;

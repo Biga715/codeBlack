@@ -42,7 +42,7 @@ class Profile extends Component{
         })
             // this.props.history.push('/LogIn');
         localStorage.clear();
-        // sessionStorage.clear();
+        sessionStorage.clear();
         document.getElementById("username").textContent = "";
         document.getElementById("name").textContent = "Name: ";
         document.getElementById("year").textContent = "Year: ";

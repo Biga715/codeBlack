@@ -189,7 +189,7 @@ app.post('/signup', (req, res, next) => {
     else{
         req.session.user = user._id;
         currentUser = req.body.username;
-        let webtoken = jsonwt.sign({ user_id: users.user_id}, 'creativekey');
+        // let webtoken = jsonwt.sign({ user_id: users.user_id}, 'creativekey');
         new_user.save(err => {
             if(err){
                 return res.status(400).json({
@@ -197,8 +197,9 @@ app.post('/signup', (req, res, next) => {
                 })
             }
             return res.status(200).json({
-                msg: "You've successfully signed up and have been logged in!",
-                token: webtoken
+                msg: "You've successfully signed up and been logged in!",
+                user: new_user
+                // token: webtoken
                 // auth: true
             })
         })
@@ -223,9 +224,18 @@ app.post('/addProfile', (req, res, next) => {
                 msg: 'Something is wrong'
             })
         }
-        return res.status(200).json({
-            msg: "Profile Added!"
+        let loggedInUser;
+        user.findOne({ username: req.body.username}, (err, users) =>{
+            loggedInUser = users;
+            let webtoken = jsonwt.sign({ user_id: users.user_id}, 'creativekey');
+            return res.status(200).json({
+                msg: "Profile Added!",
+                user: loggedInUser,
+                token: webtoken
+            })
         })
+        
+        
     })
 
 });
