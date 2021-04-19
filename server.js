@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -16,6 +17,7 @@ const request = require('request');
 //const upload = require('./upload');
 var siofu = require("socketio-file-upload");
 const jsonwt = require('jsonwebtoken');
+const fileupload = require('express-fileupload');
 
 var currentUser = "";
 var currentSession;
@@ -26,6 +28,46 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+//for file upload
+app.use(fileupload());
+app.use(express.static("files"));
+
+app.post('/upload', (req, res) => {
+    const newpath = __dirname + "/resourceFiles/";
+    const file = req.files.file;
+    const filename = file.name;
+    console.log(newpath);
+    console.log(filename);
+    console.log("in upload function");
+    
+    file.mv(`${newpath}${filename}`, (err) => {
+        if(err){
+            res.status(500).send({ message: "File upload failed", code: 200 });
+        }
+        res.status(200).send({ message: "File Uploaded", code: 200 });
+        
+    });
+    
+});
+
+
+//trying to get list of files
+
+const directory = __dirname + "/resourceFiles/";
+const path = require('path');
+const fs = require('fs');
+app.post('/getFiles', (req, res) => {
+    
+    fs.readdirSync(directory).forEach(file => {
+        if (fs.lstatSync(path.resolve(directory, file)).isDirectory()) {
+          console.log('Directory: ' + file);
+        } else {
+          console.log('File: ' + file);
+        }
+      });
+      res.send(fs.readdirSync(directory));
+});
+
 
 // const connection = mongoose.createConnection(mongoUri, {
 //     useNewUrlParser: true,
