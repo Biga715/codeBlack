@@ -14,6 +14,7 @@ const profile = require('./models/profile');
 const request = require('request');
 //const { default: Home } = require('./my-app/src/Home');
 //const upload = require('./upload');
+var siofu = require("socketio-file-upload");
 
 var currentUser = "";
 var currentSession;
@@ -110,7 +111,10 @@ io.on('connection', socket => {
     console.log('new client connected');
     //socket.emit('connection', null);
    // socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) });
-    
+   var uploader = new siofu();
+   uploader.dir = "/uploads";
+   uploader.listen(socket);
+
    socket.on('message', ({name, message}) => {
     io.emit('message', {name, message})
    })

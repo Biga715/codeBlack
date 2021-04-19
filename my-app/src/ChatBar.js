@@ -1,12 +1,16 @@
 import React, { Component, useState, useEffect} from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './App.css';
 import ChatWindow from './ChatWindow';
 import socketClient  from "socket.io-client";
+import SocketIOFileUpload from "socketio-file-upload";
 import { STATES } from 'mongoose';
 const SERVER = "http://localhost:3000";
 var socket = socketClient(SERVER);
 
+
+//const uploader = new SocketIOFileUpload(socket);
 /*
 class ChatBar extends Component{
     constructor(props){
@@ -72,8 +76,9 @@ class ChatBar extends Component{
 export default ChatBar;
 */
 
-function ChatBar(props){
 
+     
+function ChatBar(props){
 
 
     
@@ -93,9 +98,6 @@ function ChatBar(props){
                 ' <input type="text" id="textBox" value={this.state.textVal} onChange={this.handleChange}></input>
 */
     
-
-
-     
         return(
             
             <div id="chatBar">
@@ -104,7 +106,8 @@ function ChatBar(props){
         
 
             <form id="textForm" onSubmit={props.onMessageSubmit}>
-            <input type="file" id="fileButton" />
+            <input type="file" id="fileButton" value={props.state.file}  onChange={e => props.onFileUpload(e)}/>
+            <button type="button" onClick={props.sendFile}> Send File</button>
 
                 <input type="text" id="textBox" value={props.state.message} label="message" name="message" onChange={e => props.onTextChange(e)}></input>
                 <input type="submit" value="Send" id="sendBtn"></input>
@@ -114,6 +117,7 @@ function ChatBar(props){
          
         );
     }
+
 
 
 

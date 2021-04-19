@@ -5,6 +5,8 @@ import ChatBar from './ChatBar';
 import ChatWindow from'./ChatWindow';
 import socketClient  from "socket.io-client";
 import axios from 'axios';
+import SocketIOFileUpload from "socketio-file-upload";
+
 
 
 /*
@@ -33,8 +35,13 @@ export default Discussion;
 */
 const SERVER = "http://localhost:4000";
 var socket = socketClient(SERVER);
+const uploader = new SocketIOFileUpload(socket);
+
+
 function Discussion() {
-    const [state, setState] = useState({message: '', name: ''});
+    const [state, setState] = useState({message: '', name: '',file: null});
+    const [file, setFile] = useState(null)
+    const [placeholder, setPlaceholder] = useState("Type message ...")
     // set state.name to current user
     // figure out how to get current user from server.js to discussion.js
     // Adding a new profile
@@ -59,25 +66,41 @@ function Discussion() {
       
       const onMessageSubmit = (e) => {
         e.preventDefault();
-        console.log("hey");
         const {name, message} = state;
-        socket.emit('message', {name, message});
+     
+        socket.emit('message', {name, message,file});
         setState({message: '', name});
         console.log(state);
+        
       }
       
       const onTextChange = (e) => {
         setState({...state, [e.target.name]: e.target.value })
+      }
+      const onFileUpload = (e) => {
+        //setFile(e.target.files[0])
+        //setPlaceholder(e.target.files[0].name)
+
+        setState({...state, [e.target.file]: e.target.value })
+       
+        uploader.listenOnInput(e.target.files[0])
+        alert(e.target.files[0].name)
+      }
+
+      const sendFile = () =>{
+        alert("Send File Called")
+
       }
       
       const renderChat = () => {
         console.log("render chat");
         console.log(chat);
         console.log("state.name: " + state.name);
+       
         // console.log("name: " + name);
-        return chat.map(({ name, message}, index) =>(
+        return chat.map(({ name, message, file}, index) =>(
           <div key={index} className="message" className={state.name == name ? 'myMessage': 'otherMessage'}>
-             <p id="message">{name}: {message}</p>
+             <p id="message">{name}: {message} {file.name}</p>
           </div>
         ))
       }
@@ -91,7 +114,7 @@ function Discussion() {
             </form>
             <ChatWindow renderChat={renderChat()} state={state}></ChatWindow>
             <ConvoList></ConvoList>
-            <ChatBar  onTextChange={onTextChange} onMessageSubmit={onMessageSubmit} state={state}></ChatBar>
+            <ChatBar  onTextChange={onTextChange} onMessageSubmit={onMessageSubmit} onFileUpload={onFileUpload} sendFile={sendFile} state={state}></ChatBar>
             </div>
         
         );

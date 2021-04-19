@@ -20,6 +20,7 @@
     "reactstrap": "^8.9.0",
     "request": "^2.88.2",
     "socket.io-client": "^4.0.0",
+    "socketio-file-upload": "^0.7.3",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
