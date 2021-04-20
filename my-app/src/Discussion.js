@@ -5,57 +5,21 @@ import ChatBar from './ChatBar';
 import ChatWindow from'./ChatWindow';
 import socketClient  from "socket.io-client";
 import axios from 'axios';
-import SocketIOFileUpload from "socketio-file-upload";
+
+import OnlineList from './OnlineList';
 
 
 
-/*
-class Discussion extends Component{
-    constructor(props){
-        super(props);
-    }
 
-    render(){
-        return(
-        
-            <div>
-            
-            
-            
-
-            <ChatWindow></ChatWindow>
-            <ConvoList></ConvoList>
-            <ChatBar></ChatBar>
-            </div>
-        
-        );
-    }
-}
-export default Discussion;
-*/
 const SERVER = "http://localhost:4000";
 var socket = socketClient(SERVER);
 // const uploader = new SocketIOFileUpload(socket);
 
 
 function Discussion() {
-    // const [state, setState] = useState({message: '', name: '',file: null});
-    const [state, setState] = useState({message: '', name: ''});
-    // const [file, setFile] = useState(null)
-    // const [placeholder, setPlaceholder] = useState("Type message ...")
-    // set state.name to current user
-    // figure out how to get current user from server.js to discussion.js
-    // Adding a new profile
-    // axios.post('http://localhost:4000/getCurrentUser', newUser)
-    //       .then(res => {
-    //         console.log(res);
-    //         this.error = '';
-    //         // this.$router.push('/login');
-    //       }, err => {
-    //         console.log(err.response);
-    //     })
-    // state.name = "belanna";
     
+    const [state, setState] = useState({message: '', name: ''});
+
 
     const [chat, setChat] = useState([]);
 
@@ -71,7 +35,7 @@ function Discussion() {
         console.log("hey");
         const {name, message} = state;
      
-        // socket.emit('message', {name, message,file});
+        
         socket.emit('message', {name, message});
         setState({message: '', name});
         console.log(state);
@@ -81,20 +45,7 @@ function Discussion() {
       const onTextChange = (e) => {
         setState({...state, [e.target.name]: e.target.value })
       }
-      // const onFileUpload = (e) => {
-      //   //setFile(e.target.files[0])
-      //   //setPlaceholder(e.target.files[0].name)
 
-      //   setState({...state, [e.target.file]: e.target.value })
-       
-      //   uploader.listenOnInput(e.target.files[0])
-      //   alert(e.target.files[0].name)
-      // }
-
-      // const sendFile = () =>{
-      //   alert("Send File Called")
-
-      // }
       
       const renderChat = () => {
         console.log("render chat");
@@ -124,7 +75,8 @@ function Discussion() {
             </form>
             <ChatWindow renderChat={renderChat()} state={state}></ChatWindow>
             <ConvoList></ConvoList>
-            {/* <ChatBar  onTextChange={onTextChange} onMessageSubmit={onMessageSubmit} onFileUpload={onFileUpload} sendFile={sendFile} state={state}></ChatBar> */}
+            <OnlineList></OnlineList>
+            
             <ChatBar  onTextChange={onTextChange} onMessageSubmit={onMessageSubmit} state={state}></ChatBar>
 
             </div>

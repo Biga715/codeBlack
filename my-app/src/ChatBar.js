@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 import ChatWindow from './ChatWindow';
 import socketClient  from "socket.io-client";
-import SocketIOFileUpload from "socketio-file-upload";
+
 import { STATES } from 'mongoose';
 const SERVER = "http://localhost:3000";
 var socket = socketClient(SERVER);

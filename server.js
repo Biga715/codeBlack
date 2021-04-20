@@ -200,7 +200,7 @@ socket.on('disconnect2', () => {
         user.id = socket.id;
         connectedUsers[socket.id] = user;
         console.log(user);
-        console.log("yerrrrrrr");
+        console.log(connectedUsers);
         socket.emit('getUser', user);
     })
     
