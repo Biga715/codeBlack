@@ -2,7 +2,7 @@
 # Running Locally
 - cd into repo 
 - run 'npm install' and 'node server.js'
-- open another terminal, cd into repo, then into my-app, and run 'npm start' **there is a proxy so the app won't run correctly if you don't start the server.js before starting the app server**
+- open another terminal, cd into repo, then into my-app, and run 'npm start' (**there is a proxy so the app won't run correctly if you don't start the server.js before starting the app server**)
 - open on localhost:3000 (the socket server was set to work on :3000 so another port won't make it work)
 # Beginning Prototypes
 ![Home Page](https://user-images.githubusercontent.com/59845198/110538397-a04bf580-80e9-11eb-89ad-35257314f1db.png)
