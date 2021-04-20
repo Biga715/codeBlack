@@ -166,6 +166,7 @@ app.get('/hasSignedIn', (req, res) => {
 //app.post('/upload', upload);
 
 //Connecting Socket.io
+let connectedUsers = {};
 var http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
@@ -174,25 +175,41 @@ const io = require('socket.io')(http, {
     credentials: true
   }
 });
+
+//on listens
+//emit sends
 io.on('connection', socket => { 
     console.log('new client connected');
-    //socket.emit('connection', null);
-   // socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) });
+
    var uploader = new siofu();
    uploader.dir = "/uploads";
    uploader.listen(socket);
-
+    
    socket.on('message', ({name, message}) => {
     io.emit('message', {name, message})
    })
-    socket.on("hello", (arg) => {
+socket.on("hello", (arg) => {
         console.log(arg); // world
-      });
-
-    socket.on('disconnect', () => {
-        console.log('user disconnected')
-      })
 });
+
+socket.on('disconnect2', () => {
+     console.log('user disconnected')
+});
+
+    socket.on("logIn", (user) => {
+        user.id = socket.id;
+        connectedUsers[socket.id] = user;
+        console.log(user);
+        console.log("yerrrrrrr");
+        socket.emit('getUser', user);
+    })
+    
+
+
+
+});
+
+
 
 
 http.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));

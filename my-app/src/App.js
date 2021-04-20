@@ -22,103 +22,6 @@ import hasSignedIn from './checkSignin';
 const SERVER = "http://localhost:4000";
 var socket = socketClient(SERVER);
 socket.emit("hello", "world");
-/*
-
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/discussion" component={Discussion}></Route>
-        <Route path="/signUp" component={SignUp}></Route>
-        <Route path="/logIn" component={LogIn}></Route>
-
-              <Switch>
-
-      </Switch>
-
-socket.on("hello", (arg1, arg2, arg3) => {
-  console.log(arg1); // 1
-  console.log(arg2); // "2"
-  console.log(arg3); // { 3: '4', 5: ArrayBuffer (1) [ 6 ] }
-  
-});*/
-/*
-const [state, setState] = useState({message: '', name: ''});
-const [chat, setChat] = useState([]);
-
-
-
-
-useEffect(() => {
-  socket.on('message', ({name, message}) => {
-    setChat([...chat, {name, message}])
-  })
-})
-
-const onMessageSubmit = (e) => {
-  e.preventDefault();
-  const [name, message] = state;
-  socket.emit('message', {name, message});
-  setState({message: '', name});
-}
-
-const onTextChange = e => {
-  setState({...state, [e.target.name]: e.target.value })
-}
-
-const renderChat = () => {
-  return chat.map(({name, message}, index) =>(
-    <div key={index}>
-      {name}: {message}
-    </div>
-  ))
-}
-
-
-class App extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-// sending sockets
-send = () => {
-  var socket = socketClient(SERVER);
-  console.log(`I'm connected with the back-end`);
-  alert("working")
-  console.log(SERVER);
-}
-
-
-
-
-  render() {
-
-    return (
-      
-      <Router>
-        <div className="App">
-          <Nav></Nav>
-          <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/discussion" component={Discussion}></Route>
-            <Route path="/signUp" component={SignUp}></Route>
-            <Route path="/logIn" component={LogIn}></Route>
-          </Switch>
-          <button onClick={this.send}  id="attachBtn"> testing</button>
-
-          <form onSubmit={onMessageSubmit}>
-            <input type="text" name="message" value={state.message} label="message" onChange={e => onTextChange(e)} ></input>
-            <input type="submit">Send</input>
-          </form>
-
-          <div>
-            {renderChat()}
-          </div>
-        </div>
-      </Router>
-
-    );
-  }
-}
-*/
 
 
 const TypeWriter = function(txtElement, words, wait = 3000){
@@ -245,8 +148,8 @@ return (
   <AuthApi.Provider value={{auth, setAuth}}>
   <Router>
     <div className="App">
-      <Nav></Nav>
-      <Routes />
+      <Nav socket={socket}></Nav>
+      <Routes socket={socket}/>
     </div>
   </Router>
   </AuthApi.Provider>
