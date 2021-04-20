@@ -15,14 +15,7 @@ class ConvoList extends Component{
 
             <div id="convoContainer">
                 <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
-                <h2 class="convoName">Conversation 1</h2>
+               
                
             </div>
         </div>

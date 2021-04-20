@@ -14,15 +14,8 @@ class OnlineList extends Component{
 
 
             <div id="onlineContainer">
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
-                <h2 class="onlineUser">John</h2>
+            
+     
                
             </div>
         </div>
