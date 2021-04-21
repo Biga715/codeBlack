@@ -83,32 +83,13 @@ function ChatBar(props){
 
     
     console.log(props);
-    /*
-    const fileUploadButton = () => {
-        document.getElementById('fileButton').click();
-        document.getElementById('fileButton').onchange = () =>{      
-        this.setState({
-            fileUploadState:document.getElementById('fileButton').value
-                });
-            }
-        
-    }
-                    <button onClick={this.fileUploadButton} component="span" id="attachBtn"> 📎</button>
-                {this.state.selectedFile}
-                ' <input type="text" id="textBox" value={this.state.textVal} onChange={this.handleChange}></input>
-*/
-    
+   
         return(
             
             <div id="chatBar">
             
-             
-        
-
             <form id="textForm" onSubmit={props.onMessageSubmit}>
-            <input type="file" id="fileButton" value={props.state.file}  onChange={e => props.onFileUpload(e)}/>
-            <button type="button" onClick={props.sendFile}> Send File</button>
-
+            
                 <input type="text" id="textBox" value={props.state.message} label="message" name="message" onChange={e => props.onTextChange(e)}></input>
                 <input type="submit" value="Send" id="sendBtn"></input>
             </form>

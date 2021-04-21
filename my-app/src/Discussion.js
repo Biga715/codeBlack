@@ -39,8 +39,8 @@ var socket = socketClient(SERVER);
 
 
 function Discussion() {
-    // const [state, setState] = useState({message: '', name: '',file: null});
-    const [state, setState] = useState({message: '', name: ''});
+     const [state, setState] = useState({message: '', name: '',file: null});
+    //const [state, setState] = useState({message: '', name: ''});
     // const [file, setFile] = useState(null)
     // const [placeholder, setPlaceholder] = useState("Type message ...")
     // set state.name to current user
@@ -81,15 +81,15 @@ function Discussion() {
       const onTextChange = (e) => {
         setState({...state, [e.target.name]: e.target.value })
       }
-      // const onFileUpload = (e) => {
+       const onFileUpload = (e) => {
       //   //setFile(e.target.files[0])
       //   //setPlaceholder(e.target.files[0].name)
 
-      //   setState({...state, [e.target.file]: e.target.value })
+         setState({...state, [e.target.file]: e.target.value })
        
       //   uploader.listenOnInput(e.target.files[0])
-      //   alert(e.target.files[0].name)
-      // }
+         alert(e.target.files[0].name)
+       }
 
       // const sendFile = () =>{
       //   alert("Send File Called")

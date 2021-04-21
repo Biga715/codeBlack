@@ -20,6 +20,9 @@ const jsonwt = require('jsonwebtoken');
 var currentUser = "";
 var currentSession;
 
+const rooms = {}
+
+
 app.use(cors());
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
@@ -70,6 +73,11 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('hey!')
 });
+
+//room
+app.get('/room', (res,req) => {
+    res.render('room', {roomName: req.params.room})
+})
 
 const verifyJWT = (req, res, next)=>{
     const token = req.headers["x-access-token"]
