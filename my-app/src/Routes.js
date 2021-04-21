@@ -10,13 +10,14 @@ import EditProfile from './EditProfile';
 
 import AuthApi from './AuthApi';
 
-function Routes() {
+function Routes(props) {
+    console.log(props.socket);
     return(
         <Switch>
             <Route path="/" exact component={Home}></Route>
             <Route path="/discussion" component={Discussion}></Route>
             <RouteRegistration path="/signUp" component={SignUp}></RouteRegistration>
-            <RouteRegistration path="/logIn" component={LogIn}></RouteRegistration>
+            <RouteRegistration path="/logIn" component={() => <LogIn socket={props.socket} />}></RouteRegistration>
             <RouteProtected path="/profile" component={Profile}></RouteProtected>
             <Route path="/resources" component ={Resources}></Route>
             <RouteProtected path="/editProfile" component={EditProfile}></RouteProtected>

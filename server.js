@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -16,6 +17,7 @@ const request = require('request');
 //const upload = require('./upload');
 var siofu = require("socketio-file-upload");
 const jsonwt = require('jsonwebtoken');
+const fileupload = require('express-fileupload');
 
 var currentUser = "";
 var currentSession;
@@ -29,6 +31,46 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+//for file upload
+app.use(fileupload());
+app.use(express.static("files"));
+
+app.post('/upload', (req, res) => {
+    const newpath = __dirname + "/resourceFiles/";
+    const file = req.files.file;
+    const filename = file.name;
+    console.log(newpath);
+    console.log(filename);
+    console.log("in upload function");
+    
+    file.mv(`${newpath}${filename}`, (err) => {
+        if(err){
+            res.status(500).send({ message: "File upload failed", code: 200 });
+        }
+        res.status(200).send({ message: "File Uploaded", code: 200 });
+        
+    });
+    
+});
+
+
+//trying to get list of files
+
+const directory = __dirname + "/resourceFiles/";
+const path = require('path');
+const fs = require('fs');
+app.post('/getFiles', (req, res) => {
+    
+    fs.readdirSync(directory).forEach(file => {
+        if (fs.lstatSync(path.resolve(directory, file)).isDirectory()) {
+          console.log('Directory: ' + file);
+        } else {
+          console.log('File: ' + file);
+        }
+      });
+      res.send(fs.readdirSync(directory));
+});
+
 
 // const connection = mongoose.createConnection(mongoUri, {
 //     useNewUrlParser: true,
@@ -132,6 +174,7 @@ app.get('/hasSignedIn', (req, res) => {
 //app.post('/upload', upload);
 
 //Connecting Socket.io
+let connectedUsers = {};
 var http = require('http').createServer(app);
 
 const io = require('socket.io')(http, {
@@ -140,25 +183,41 @@ const io = require('socket.io')(http, {
     credentials: true
   }
 });
+
+//on listens
+//emit sends
 io.on('connection', socket => { 
     console.log('new client connected');
-    //socket.emit('connection', null);
-   // socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) });
+
    var uploader = new siofu();
    uploader.dir = "/uploads";
    uploader.listen(socket);
-
+    
    socket.on('message', ({name, message}) => {
     io.emit('message', {name, message})
    })
-    socket.on("hello", (arg) => {
+socket.on("hello", (arg) => {
         console.log(arg); // world
-      });
-
-    socket.on('disconnect', () => {
-        console.log('user disconnected')
-      })
 });
+
+socket.on('disconnect2', () => {
+     console.log('user disconnected')
+});
+
+    socket.on("logIn", (user) => {
+        user.id = socket.id;
+        connectedUsers[socket.id] = user;
+        console.log(user);
+        console.log(connectedUsers);
+        socket.emit('getUser', user);
+    })
+    
+
+
+
+});
+
+
 
 
 http.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
