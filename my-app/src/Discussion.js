@@ -17,6 +17,22 @@ var socket = socketClient(SERVER);
 
 
 function Discussion() {
+     const [state, setState] = useState({message: '', name: '',file: null});
+    //const [state, setState] = useState({message: '', name: ''});
+    // const [file, setFile] = useState(null)
+    // const [placeholder, setPlaceholder] = useState("Type message ...")
+    // set state.name to current user
+    // figure out how to get current user from server.js to discussion.js
+    // Adding a new profile
+    // axios.post('http://localhost:4000/getCurrentUser', newUser)
+    //       .then(res => {
+    //         console.log(res);
+    //         this.error = '';
+    //         // this.$router.push('/login');
+    //       }, err => {
+    //         console.log(err.response);
+    //     })
+    // state.name = "belanna";
     
     const [state, setState] = useState({message: '', name: ''});
 
@@ -45,7 +61,6 @@ function Discussion() {
       const onTextChange = (e) => {
         setState({...state, [e.target.name]: e.target.value })
       }
-
       
       const renderChat = () => {
         console.log("render chat");
