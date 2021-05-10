@@ -1,4 +1,4 @@
-# codeBlack
+# codeBlack - naomi horsoford
 # Running Locally
 - cd into repo 
 - run 'npm install' and 'node server.js'
